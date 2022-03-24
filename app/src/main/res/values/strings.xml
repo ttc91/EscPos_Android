@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">printer-coffee</string>
+
+    <string name="host">192.168.120.101</string>
+    <string name="port">9100</string>
+
+</resources>
