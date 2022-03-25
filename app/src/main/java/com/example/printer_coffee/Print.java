@@ -3,12 +3,15 @@ package com.example.printer_coffee;
 import static com.example.printer_coffee.library.EscPosConst.LF;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.widget.EditText;
 
 import androidx.annotation.RequiresApi;
 
 import com.example.printer_coffee.library.EscPos;
+import com.example.printer_coffee.library.ImageItem;
 import com.example.printer_coffee.library.QRCodeItem;
 import com.example.printer_coffee.library.Style;
 import com.example.printer_coffee.library.Text2Column;
@@ -174,10 +177,21 @@ public class Print extends Thread{
 
              */
 
+            /*
             QRCodeItem qrCodeItem = new QRCodeItem.Builder()
                     .setText("1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111"
                     + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "11111111").setSize(QRCodeItem.QRCodeSize.SMALL).build();
             qrCodeItem.print(escPos);
+
+
+
+             */
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inScaled = false;
+            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.dog, options);
+            ImageItem imageItem = new ImageItem.Builder().setBitMap(bitmap).setRasterBitImageMode(ImageItem.RasterBitImageMode.QUADRUPLE).setJustification(ImageItem.Justification.CENTER).build();
+            imageItem.print(escPos);
 
             escPos.write(LF);
             escPos.write(LF);
