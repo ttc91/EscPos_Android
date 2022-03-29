@@ -94,25 +94,6 @@ public class TextItem {
         escPos.write('M');
         escPos.write(fontName.value);
 
-//        if(isRightJustification == true){
-//
-//            escPos.write(ESC);
-//            escPos.write('a');
-//            escPos.write(2);
-//        }else if (isCenterJustification == true){
-//
-//            escPos.write(ESC);
-//            escPos.write('a');
-//            escPos.write(1);
-//
-//        } else{
-//
-//            escPos.write(ESC);
-//            escPos.write('a');
-//            escPos.write(0);
-//        }
-
-
         byte[] bytes = text.getBytes();
 
         escPos.write(bytes);

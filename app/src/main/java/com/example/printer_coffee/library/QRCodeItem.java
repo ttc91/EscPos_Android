@@ -150,6 +150,10 @@ public class QRCodeItem {
 
         escPos.write(bytes, 0, bytes.length);
 
+        escPos.write(ESC);
+        escPos.write('a');
+        escPos.write(0);
+
     }
 
 

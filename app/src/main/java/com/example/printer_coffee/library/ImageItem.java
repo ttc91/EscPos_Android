@@ -5,10 +5,23 @@ import static com.example.printer_coffee.library.EscPosConst.GS;
 
 import static java.lang.Math.round;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -33,6 +46,9 @@ public class ImageItem {
     public ImageItem (Builder builder){
 
         this.bitmap = builder.bitmap;
+        if (this.bitmap == null && builder.bitmap == null) {
+            Log.e("NULL", "True");
+        }
         this.justification = builder.justification;
         this.rasterBitImageMode = builder.rasterBitImageMode;
 
@@ -53,15 +69,61 @@ public class ImageItem {
         }
     }
 
+
+
+    //Getter and setters :
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
+    public void setJustification(Justification justification) {
+        this.justification = justification;
+    }
+
+    public void setRasterBitImageMode(RasterBitImageMode rasterBitImageMode) {
+        this.rasterBitImageMode = rasterBitImageMode;
+    }
+
     //Builder class :
     public static class Builder {
 
-        protected Bitmap bitmap;
+        protected Bitmap bitmap = null;
         protected Justification justification = Justification.LEFT;
         protected RasterBitImageMode rasterBitImageMode = RasterBitImageMode.NORMAL;
 
-        public Builder setBitMap (Bitmap bitmap){
-            this.bitmap = bitmap;
+        public Builder setPath(Context context, String path, String imageName){
+            File extStore = new File (Environment.getExternalStorageDirectory() + File.separator + path + "/" + imageName);
+            Uri image = Uri.fromFile(extStore);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+
+            Log.e("LINK", extStore.getPath());
+            try{
+
+                this.bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), image);
+
+            }catch (FileNotFoundException e){
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+//
+//            try {
+//
+//                URL url = new URL(link);
+//                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//                connection.setDoInput(true);
+//                connection.connect();
+//                InputStream input = connection.getInputStream();
+//                this.bitmap = BitmapFactory.decodeStream(input);
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+
             return this;
         }
 
@@ -76,6 +138,9 @@ public class ImageItem {
         }
 
         public ImageItem build () {
+            if (bitmap == null) {
+                Log.e("BUILD NULL", "True");
+            }
             return new ImageItem(this);
         }
     }
@@ -223,6 +288,11 @@ public class ImageItem {
         byte[] bytes = getBytes();
         escPos.write(bytes, 0, bytes.length);
 
+        escPos.write(ESC);
+        escPos.write('a');
+        escPos.write(0);
+
     }
+
 
 }

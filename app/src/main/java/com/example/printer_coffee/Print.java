@@ -17,15 +17,18 @@ import com.example.printer_coffee.library.Style;
 import com.example.printer_coffee.library.Text2Column;
 import com.example.printer_coffee.library.TextItem;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Print extends Thread{
 
     private Context context;
+    private Bitmap bitmap;
 
     public Print(Context context){
         this.context = context;
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -34,10 +37,17 @@ public class Print extends Thread{
 
         String host = context.getString(R.string.host);
 
+        EscPos escPos = new EscPos();
         try {
-
-            EscPos escPos = new EscPos();
             escPos.start(host);
+
+//            BitmapFactory.Options options = new BitmapFactory.Options();
+//            options.inScaled = false;
+
+            ImageItem imageItem = new ImageItem.Builder().setPath(context,"Pictures","shop.jpg")
+                    .setRasterBitImageMode(ImageItem.RasterBitImageMode.NORMAL).setJustification(ImageItem.Justification.CENTER).build();
+            imageItem.print(escPos);
+
 
             /*
             //SHOP NAME :
@@ -166,32 +176,14 @@ public class Print extends Thread{
             text.setJustification(TextItem.Justification.CENTER);
             text.print(escPos);
 
-            escPos.write(LF);
-            escPos.write(LF);
-            escPos.write(LF);
-            escPos.write(LF);
-            escPos.write(LF);
-            escPos.write(LF);
-            escPos.write(LF);
-            escPos.cut(EscPos.CutMode.FULL);
 
-             */
-
-            /*
             QRCodeItem qrCodeItem = new QRCodeItem.Builder()
                     .setText("1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111"
-                    + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "11111111").setSize(QRCodeItem.QRCodeSize.SMALL).build();
+                    + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "11111111").setSize(QRCodeItem.QRCodeSize.SMALL).setJustification(QRCodeItem.Justification.CENTER).build();
             qrCodeItem.print(escPos);
 
+*/
 
-
-             */
-
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inScaled = false;
-            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.dog, options);
-            ImageItem imageItem = new ImageItem.Builder().setBitMap(bitmap).setRasterBitImageMode(ImageItem.RasterBitImageMode.QUADRUPLE).setJustification(ImageItem.Justification.CENTER).build();
-            imageItem.print(escPos);
 
             escPos.write(LF);
             escPos.write(LF);
@@ -207,5 +199,7 @@ public class Print extends Thread{
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 }
