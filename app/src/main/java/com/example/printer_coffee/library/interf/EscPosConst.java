@@ -1,4 +1,4 @@
-package com.example.printer_coffee.library;
+package com.example.printer_coffee.library.interf;
 
 public interface EscPosConst {
 
@@ -33,7 +33,17 @@ public interface EscPosConst {
             this.value = value;
         }
 
-
     }
+
+    public enum CutMode{
+        FULL(48),
+        PART(49);
+
+        public int value;
+        private CutMode (int value){
+            this.value = value;
+        }
+    }
+
 
 }

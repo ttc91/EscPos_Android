@@ -1,23 +1,18 @@
 package com.example.printer_coffee;
 
-import static com.example.printer_coffee.library.EscPosConst.LF;
+import static com.example.printer_coffee.library.interf.EscPosConst.LF;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
-import android.widget.EditText;
 
 import androidx.annotation.RequiresApi;
 
 import com.example.printer_coffee.library.EscPos;
-import com.example.printer_coffee.library.ImageItem;
-import com.example.printer_coffee.library.QRCodeItem;
-import com.example.printer_coffee.library.Style;
-import com.example.printer_coffee.library.Text2Column;
-import com.example.printer_coffee.library.TextItem;
+import com.example.printer_coffee.library.interf.ItemConfiguration;
+import com.example.printer_coffee.library.item.image.ImageItem;
+import com.example.printer_coffee.library.item.image.ImageItemBuilder;
 
-import java.io.File;
 import java.io.IOException;
 
 public class Print extends Thread{
@@ -37,15 +32,15 @@ public class Print extends Thread{
 
         String host = context.getString(R.string.host);
 
-        EscPos escPos = new EscPos();
+        EscPos escPos = EscPos.getInstance();
         try {
             escPos.start(host);
 
 //            BitmapFactory.Options options = new BitmapFactory.Options();
 //            options.inScaled = false;
 
-            ImageItem imageItem = new ImageItem.Builder().setPath(context,"Pictures","shop.jpg")
-                    .setRasterBitImageMode(ImageItem.RasterBitImageMode.NORMAL).setJustification(ImageItem.Justification.CENTER).build();
+            ImageItem imageItem = new ImageItemBuilder().setPath(context,"Pictures","shop.jpg")
+                    .setRasterBitImageMode(ImageItem.RasterBitImageMode.NORMAL).setJustification(ImageItem.Justification.RIGHT).build();
             imageItem.print(escPos);
 
 
@@ -184,6 +179,18 @@ public class Print extends Thread{
 
 */
 
+//            TextColumnItem textColumnItem = new TextColumnItemBuilder().leftContent("Rechnung 00002").rightContent("22.03.2022 07:48:58").numCharOfLeft(15).setJustificationOfRightColumn(ItemConfiguration.Justification.CENTER).build();
+//            textColumnItem.print(escPos);
+//
+//            textColumnItem = new TextColumnItemBuilder().leftContent("Tischnr . 8").rightContent("Bediener: Chef").numCharOfLeft(15).build();
+//            textColumnItem.print(escPos);
+
+//            QRCodeItem qrCodeItem = new QRCodeItemBuilder()
+//                    .setText("1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111"
+//                            + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "11111111").setSize(QRCodeItem.QRCodeSize.SMALL).setJustification(QRCodeItem.Justification.RIGHT).build();
+//            qrCodeItem.print(escPos);
+
+            escPos.writeLF();
 
             escPos.write(LF);
             escPos.write(LF);

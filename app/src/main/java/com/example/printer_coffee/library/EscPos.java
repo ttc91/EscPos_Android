@@ -1,76 +1,41 @@
 package com.example.printer_coffee.library;
 
 
-import static com.example.printer_coffee.library.EscPosConst.ESC;
-import static com.example.printer_coffee.library.EscPosConst.GS;
-import static com.example.printer_coffee.library.EscPosConst.LF;
+import static com.example.printer_coffee.library.interf.EscPosConst.GS;
+import static com.example.printer_coffee.library.interf.EscPosConst.LF;
 
-import android.graphics.Typeface;
-import android.graphics.fonts.Font;
-import android.graphics.fonts.FontStyle;
-import android.util.Log;
-import android.widget.EditText;
+import com.example.printer_coffee.library.interf.EscPosConst;
 
-import org.w3c.dom.Text;
-
-import java.io.ByteArrayOutputStream;
-import java.io.Closeable;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PipedInputStream;
 import java.net.Socket;
 import java.nio.channels.UnsupportedAddressTypeException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
 
-public class EscPos {
+public class EscPos implements EscPosConst {
 
-    protected OutputStream outputStream;
-    protected PipedInputStream pipedInputStream;
-    protected Style style;
+    private static EscPos escpos = new EscPos();
+    private EscPos(){}
+
+    public static EscPos getInstance(){
+        if (escpos == null){
+            escpos = new EscPos();
+        }
+        return escpos;
+    }
+
+    private OutputStream outputStream;
+    private PipedInputStream pipedInputStream;
 
     private Socket socket;
-
-//    public enum CharacterCodeTable {
-//        CP437_USA_Standard_Europe(0, "cp437");
-//        public int value;
-//        public String charsetName;
-//
-//        private CharacterCodeTable(int value) {
-//            this.value = value;
-//            this.charsetName = "cp437";
-//        }
-//
-//        private CharacterCodeTable(int value, String charsetName) {
-//            this.value = value;
-//            this.charsetName = charsetName;
-//        }
-//    }
-
-//    public final EscPos setCharsetName(String charsetName) {
-//        this.charsetName = charsetName;
-//        return this;
-//    }
 
     public EscPos start(String host) throws IOException{
 
         pipedInputStream = new PipedInputStream();
-        style = new Style();
         socket = new Socket(host, 9100);
         outputStream = socket.getOutputStream();
 
         return this;
-    }
-
-    public EscPos setStyle(Style style){
-        this.style = style;
-        return this;
-    }
-
-    public Style getStyle(){
-        return this.style;
     }
 
     public EscPos writeStyle (byte[] bytes, int off, int length) throws UnsupportedAddressTypeException, IOException{
@@ -94,15 +59,6 @@ public class EscPos {
         return this;
     }
 
-    public EscPos write(Style style, byte[] bytes) throws UnsupportedAddressTypeException, IOException{
-
-        byte[] buf = style.configBytes();
-        writeStyle(buf, 0, bytes.length);
-        this.outputStream.write(bytes);
-        write(LF);
-        return this;
-    }
-
     public EscPos writeLF() throws UnsupportedAddressTypeException, IOException{
         this.outputStream.write(LF);
         return this;
@@ -116,15 +72,6 @@ public class EscPos {
     public void close() throws IOException{
         outputStream.close();
         socket.close();
-    }
-
-    public enum CutMode{
-        FULL(48),
-        PART(49);
-        private int value;
-        private CutMode (int value){
-            this.value = value;
-        }
     }
 
     public EscPos cut (CutMode mode) throws IOException{

@@ -1,32 +1,28 @@
-package com.example.printer_coffee.library;
+package com.example.printer_coffee.library.item.image;
 
-import static com.example.printer_coffee.library.EscPosConst.ESC;
-import static com.example.printer_coffee.library.EscPosConst.GS;
+import static com.example.printer_coffee.library.interf.EscPosConst.ESC;
+import static com.example.printer_coffee.library.interf.EscPosConst.GS;
 
 import static java.lang.Math.round;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.example.printer_coffee.library.EscPos;
+import com.example.printer_coffee.library.base.BaseItem;
+import com.example.printer_coffee.library.interf.ImageConfiguration;
+import com.example.printer_coffee.library.interf.ItemConfiguration;
+import com.example.printer_coffee.library.item.column.TextColumnItem;
+
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class ImageItem {
+public class ImageItem extends BaseItem implements ItemConfiguration, ImageConfiguration, Cloneable {
 
     private Bitmap bitmap;
 
@@ -42,8 +38,7 @@ public class ImageItem {
 
     private ByteArrayOutputStream baCachedEscPosRaster = new ByteArrayOutputStream();
 
-    //Construction :
-    public ImageItem (Builder builder){
+    public ImageItem (ImageItemBuilder builder){
 
         this.bitmap = builder.bitmap;
         if (this.bitmap == null && builder.bitmap == null) {
@@ -69,10 +64,6 @@ public class ImageItem {
         }
     }
 
-
-
-    //Getter and setters :
-
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
     }
@@ -85,67 +76,6 @@ public class ImageItem {
         this.rasterBitImageMode = rasterBitImageMode;
     }
 
-    //Builder class :
-    public static class Builder {
-
-        protected Bitmap bitmap = null;
-        protected Justification justification = Justification.LEFT;
-        protected RasterBitImageMode rasterBitImageMode = RasterBitImageMode.NORMAL;
-
-        public Builder setPath(Context context, String path, String imageName){
-            File extStore = new File (Environment.getExternalStorageDirectory() + File.separator + path + "/" + imageName);
-            Uri image = Uri.fromFile(extStore);
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-
-            Log.e("LINK", extStore.getPath());
-            try{
-
-                this.bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), image);
-
-            }catch (FileNotFoundException e){
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-//
-//            try {
-//
-//                URL url = new URL(link);
-//                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//                connection.setDoInput(true);
-//                connection.connect();
-//                InputStream input = connection.getInputStream();
-//                this.bitmap = BitmapFactory.decodeStream(input);
-//
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-            return this;
-        }
-
-        public Builder setJustification(Justification justification){
-            this.justification = justification;
-            return this;
-        }
-
-        public Builder setRasterBitImageMode(RasterBitImageMode rasterBitImageMode){
-            this.rasterBitImageMode = rasterBitImageMode;
-            return this;
-        }
-
-        public ImageItem build () {
-            if (bitmap == null) {
-                Log.e("BUILD NULL", "True");
-            }
-            return new ImageItem(this);
-        }
-    }
-
-    //Shuffle to ditherMatrix :
     private int[] shuffle(int size,Random random){
         Set<Integer> set = new HashSet<>();
         int intArray[] = new int[size];
@@ -191,29 +121,29 @@ public class ImageItem {
         return bitmap.getHeight();
     }
 
-    private ByteArrayOutputStream getRasterBytes(){
-        if(baCachedEscPosRaster.size() > 0)
+    private ByteArrayOutputStream getRasterBytes() {
+        if (baCachedEscPosRaster.size() > 0)
             return baCachedEscPosRaster;
 
-        //Transform RGB Image to raster format
+            //Transform RGB Image to raster format
         else {
             ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
             int Byte;
             int bit;
-            for (int y = 0; y < bitmap.getHeight(); y++){
+            for (int y = 0; y < bitmap.getHeight(); y++) {
                 Byte = 0;
                 bit = 0;
-                for (int x = 0; x < bitmap.getWidth(); x++){
+                for (int x = 0; x < bitmap.getWidth(); x++) {
                     int value = getBitonalValue(x, y);
                     Byte = Byte | (value << (7 - bit));
-                    bit ++;
-                    if (bit == 8){
+                    bit++;
+                    if (bit == 8) {
                         byteArray.write(Byte);
                         Byte = 0;
                         bit = 0;
                     }
                 }
-                if (bit > 0){
+                if (bit > 0) {
                     byteArray.write(Byte);
                 }
             }
@@ -221,32 +151,6 @@ public class ImageItem {
             baCachedEscPosRaster = byteArray;
         }
         return baCachedEscPosRaster;
-    }
-
-    //enum :
-    public enum RasterBitImageMode {
-        NORMAL(0),
-        DOUBLE_WIDTH(1),
-        DOUBLE_HEIGHT(2),
-        QUADRUPLE(3);
-
-        public int value;
-
-        private RasterBitImageMode(int value){
-            this.value = value;
-        }
-    }
-
-    public enum Justification {
-        LEFT(0),
-        CENTER(1),
-        RIGHT(2);
-
-        public int value;
-
-        private Justification(int value){
-            this.value = value;
-        }
     }
 
     private byte[] getBytes(){
@@ -283,16 +187,31 @@ public class ImageItem {
         return bytes.toByteArray();
     }
 
+    @Override
     public void print(EscPos escPos) throws IOException {
 
         byte[] bytes = getBytes();
         escPos.write(bytes, 0, bytes.length);
 
-        escPos.write(ESC);
-        escPos.write('a');
-        escPos.write(0);
-
+        reset(escPos);
     }
 
+    @Override
+    public void reset(EscPos escPos) throws IOException{
+        super.reset(escPos);
+            escPos.write(ESC);
+            escPos.write('a');
+            escPos.write(0);
+    }
 
+    @NonNull
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        try{
+            return (ImageItem) super.clone();
+        }catch (CloneNotSupportedException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

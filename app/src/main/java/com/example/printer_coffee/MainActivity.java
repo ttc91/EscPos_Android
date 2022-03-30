@@ -50,9 +50,10 @@ public class MainActivity extends AppCompatActivity {
 //                intent.setType("image/*");
 //                startActivityForResult(Intent.createChooser(intent, ""), 1);
 
-                if(ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 121);
-                }
+//                if(ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+//                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 121);
+//                }
+                new Print(getApplicationContext()).start();
             }
         });
     }
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == 121 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            new Print(getApplicationContext()).start();
+
         }
     }
 }
