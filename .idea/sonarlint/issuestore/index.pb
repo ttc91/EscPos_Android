@@ -1,5 +1,25 @@
 
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-s
-Capp/src/main/java/com/example/printer_coffee/library/ImageItem.java,0\1\0105330f9997605fc7f19782083e935b46b44e9f
+‹
+[app/src/main/java/com/example/printer_coffee/library/item/column/TextColumnItemBuilder.java,6\7\67f2ebfbe32cbdfcf88c746c0c782eb7c5a263cd
+ƒ
+Sapp/src/main/java/com/example/printer_coffee/library/interf/ImageConfiguration.java,1\5\1555586c276d7219b50b2b5a584715d21c35ef38
+n
+>app/src/main/java/com/example/printer_coffee/MainActivity.java,9\e\9e6aac2a5cb143b04bd4a9baf9f9e3faa3c696be
+…
+Uapp/src/main/java/com/example/printer_coffee/library/item/image/ImageItemBuilder.java,a\3\a32f13680b754d0d80d67a7df898dc01e23b2b6f
+|
+Lapp/src/main/java/com/example/printer_coffee/library/item/text/TextItem.java,c\c\cc28a868a751babb6508dbc45e7bc4e7709929ce
+w
+Gapp/src/main/java/com/example/printer_coffee/library/base/BaseItem.java,4\b\4bff43baeb48fca2310f2b1486cadb70cbbe17c4
+ƒ
+Sapp/src/main/java/com/example/printer_coffee/library/item/text/TextItemBuilder.java,5\0\500f610a6f2f74cc16afb70e013dabbefc0fe8f7
+y
+Iapp/src/main/java/com/example/printer_coffee/library/interf/WrapItem.java,6\c\6c72b1ae0d9b23894e0a733f078f06b8608ce458
+„
+Tapp/src/main/java/com/example/printer_coffee/library/item/column/TextColumnItem.java,0\5\05dd6cf77d493752849534c32548909128a32d80
+~
+Napp/src/main/java/com/example/printer_coffee/library/item/image/ImageItem.java,8\1\812f21246dac97ad5fdb79102ead5191c9257716
+p
+@app/src/main/java/com/example/printer_coffee/library/EscPos.java,b\7\b7d032154203681cda6b651615c92036ae502957

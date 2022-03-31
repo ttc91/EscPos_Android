@@ -9,7 +9,10 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.example.printer_coffee.library.EscPos;
+import com.example.printer_coffee.library.interf.BarCodeConfiguration;
 import com.example.printer_coffee.library.interf.ItemConfiguration;
+import com.example.printer_coffee.library.item.barcode.BarCodeItem;
+import com.example.printer_coffee.library.item.barcode.BarCodeItemBuilder;
 import com.example.printer_coffee.library.item.image.ImageItem;
 import com.example.printer_coffee.library.item.image.ImageItemBuilder;
 
@@ -39,10 +42,12 @@ public class Print extends Thread{
 //            BitmapFactory.Options options = new BitmapFactory.Options();
 //            options.inScaled = false;
 
-            ImageItem imageItem = new ImageItemBuilder().setPath(context,"Pictures","shop.jpg")
-                    .setRasterBitImageMode(ImageItem.RasterBitImageMode.NORMAL).setJustification(ImageItem.Justification.RIGHT).build();
-            imageItem.print(escPos);
+//            ImageItem imageItem = new ImageItemBuilder().setPath(context,"Pictures","shop.jpg")
+//                    .setRasterBitImageMode(ImageItem.RasterBitImageMode.NORMAL).setJustification(ImageItem.Justification.RIGHT).build();
+//            imageItem.print(escPos);
 
+//            BarCodeItem item = new BarCodeItemBuilder().setData("1234567910").setBarCodeSystem(BarCodeConfiguration.BarCodeSystem.CODE39_B).build();
+//            item.print(escPos);
 
             /*
             //SHOP NAME :
