@@ -40,7 +40,7 @@ public class TextItem extends BaseItem implements WrapItem, ItemConfiguration, C
         return this.text;
     }
 
-    public TextItem(TextItemBuilder build){
+    protected TextItem(TextItemBuilder build){
         reset();
         this.fontName = build.fontName;
         this.fontWidth = build.fontWidth;
@@ -73,13 +73,7 @@ public class TextItem extends BaseItem implements WrapItem, ItemConfiguration, C
     @Override
     public void print(EscPos escPos) throws IOException{
 
-        if (justification == Justification.RIGHT){
-            setRightJustification();
-        }else if (justification == Justification.CENTER){
-            setCenterJustification();
-        }else {
-            setLeftJustification();
-        }
+        wrap();
 
         escPos.write(ESC);
         escPos.write('E');
@@ -155,10 +149,18 @@ public class TextItem extends BaseItem implements WrapItem, ItemConfiguration, C
         }
 
         this.text = printContent;
+
+        if (justification == Justification.RIGHT){
+            setRightJustification();
+        }else if (justification == Justification.CENTER){
+            setCenterJustification();
+        }else {
+            setLeftJustification();
+        }
     }
 
     private void setRightJustification(){
-        this.wrap();
+
         String[] lines = this.text.split("\n");
         String contentPrint = "";
 
@@ -178,7 +180,7 @@ public class TextItem extends BaseItem implements WrapItem, ItemConfiguration, C
     }
 
     private void setCenterJustification(){
-        this.wrap();
+
         String[] lines = this.text.split("\n");
         String contentPrint = "";
 
@@ -200,7 +202,7 @@ public class TextItem extends BaseItem implements WrapItem, ItemConfiguration, C
     }
 
     private void setLeftJustification(){
-        this.wrap();
+
         String[] lines = this.text.split("\n");
         String contentPrint = "";
         for (String line : lines){

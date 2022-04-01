@@ -36,7 +36,7 @@ public class TextColumnItem extends BaseItem implements WrapItem, ItemConfigurat
     protected Integer numCharOfLeftContent;
     private String textPrint = "";
 
-    public TextColumnItem(TextColumnItemBuilder build){
+    protected TextColumnItem(TextColumnItemBuilder build){
         reset();
         this.leftText = build.leftText;
         this.rightText = build.rightText;
@@ -120,8 +120,10 @@ public class TextColumnItem extends BaseItem implements WrapItem, ItemConfigurat
         Integer remainderSpace = Math.abs(maxLengthOfLineDefault.value - this.numCharOfLeftContent);
 
         TextItem text_left = new TextItemBuilder().setText(this.leftText).setMaxLengthOfLine(this.numCharOfLeftContent).setJustification(this.leftColJustification).build();
+        text_left.wrap();
 
         TextItem text_right = new TextItemBuilder().setText(this.rightText).setMaxLengthOfLine(remainderSpace - 2).setJustification(this.rightColJustification).build();
+        text_right.wrap();
 
         String printContent = wrapColumn(text_left.getText(), text_right.getText());
 

@@ -13,8 +13,14 @@ import com.example.printer_coffee.library.interf.BarCodeConfiguration;
 import com.example.printer_coffee.library.interf.ItemConfiguration;
 import com.example.printer_coffee.library.item.barcode.BarCodeItem;
 import com.example.printer_coffee.library.item.barcode.BarCodeItemBuilder;
+import com.example.printer_coffee.library.item.column.TextColumnItem;
+import com.example.printer_coffee.library.item.column.TextColumnItemBuilder;
 import com.example.printer_coffee.library.item.image.ImageItem;
 import com.example.printer_coffee.library.item.image.ImageItemBuilder;
+import com.example.printer_coffee.library.item.qrcode.QRCodeItem;
+import com.example.printer_coffee.library.item.qrcode.QRCodeItemBuilder;
+import com.example.printer_coffee.library.item.text.TextItem;
+import com.example.printer_coffee.library.item.text.TextItemBuilder;
 
 import java.io.IOException;
 
@@ -184,11 +190,18 @@ public class Print extends Thread{
 
 */
 
-//            TextColumnItem textColumnItem = new TextColumnItemBuilder().leftContent("Rechnung 00002").rightContent("22.03.2022 07:48:58").numCharOfLeft(15).setJustificationOfRightColumn(ItemConfiguration.Justification.CENTER).build();
-//            textColumnItem.print(escPos);
-//
-//            textColumnItem = new TextColumnItemBuilder().leftContent("Tischnr . 8").rightContent("Bediener: Chef").numCharOfLeft(15).build();
-//            textColumnItem.print(escPos);
+            TextItem textItem = new TextItemBuilder().setText("Tat Tan Chu").setMaxLengthOfLine(30).setJustification(ItemConfiguration.Justification.RIGHT).build();
+            textItem.print(escPos);
+            textItem = new TextItemBuilder().setText("Tat Tan Chu").setJustification(ItemConfiguration.Justification.CENTER).build();
+            textItem.print(escPos);
+
+
+
+            TextColumnItem textColumnItem = new TextColumnItemBuilder().leftContent("Rechnung 00002").rightContent("22.03.2022 07:48:58").numCharOfLeft(15).setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT).build();
+            textColumnItem.print(escPos);
+
+            textColumnItem = new TextColumnItemBuilder().leftContent("Tischnr . 8").rightContent("Bediener: Chef").setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT).numCharOfLeft(15).build();
+            textColumnItem.print(escPos);
 
 //            QRCodeItem qrCodeItem = new QRCodeItemBuilder()
 //                    .setText("1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111"

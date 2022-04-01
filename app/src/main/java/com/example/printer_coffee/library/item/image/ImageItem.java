@@ -38,7 +38,7 @@ public class ImageItem extends BaseItem implements ItemConfiguration, ImageConfi
 
     private ByteArrayOutputStream baCachedEscPosRaster = new ByteArrayOutputStream();
 
-    public ImageItem (ImageItemBuilder builder){
+    protected ImageItem (ImageItemBuilder builder){
 
         this.bitmap = builder.bitmap;
         if (this.bitmap == null && builder.bitmap == null) {
