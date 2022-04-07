@@ -11,6 +11,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.printer_coffee.library.EscPos;
+import com.example.printer_coffee.library.Label;
 import com.example.printer_coffee.library.base.BaseItem;
 import com.example.printer_coffee.library.interf.ImageConfiguration;
 import com.example.printer_coffee.library.interf.ItemConfiguration;
@@ -188,20 +189,25 @@ public class ImageItem extends BaseItem implements ItemConfiguration, ImageConfi
     }
 
     @Override
-    public void print(EscPos escPos) throws IOException {
+    public void print(Label label) throws IOException {
 
         byte[] bytes = getBytes();
-        escPos.write(bytes, 0, bytes.length);
+        label.listBytes.add(bytes);
 
-        reset(escPos);
+        reset(label);
     }
 
     @Override
-    public void reset(EscPos escPos) throws IOException{
-        super.reset(escPos);
-            escPos.write(ESC);
-            escPos.write('a');
-            escPos.write(0);
+    public void reset(Label label) throws IOException{
+        super.reset(label);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        outputStream.write(ESC);
+        outputStream.write('a');
+        outputStream.write(0);
+
+        label.listBytes.add(outputStream.toByteArray());
     }
 
     @NonNull

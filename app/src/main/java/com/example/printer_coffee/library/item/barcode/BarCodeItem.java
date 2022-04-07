@@ -7,9 +7,12 @@ import static com.example.printer_coffee.library.interf.EscPosConst.NUL;
 import androidx.annotation.NonNull;
 
 import com.example.printer_coffee.library.EscPos;
+import com.example.printer_coffee.library.Label;
 import com.example.printer_coffee.library.base.BaseItem;
 import com.example.printer_coffee.library.interf.BarCodeConfiguration;
 import com.example.printer_coffee.library.interf.ItemConfiguration;
+import com.example.printer_coffee.library.item.text.TextItem;
+import com.example.printer_coffee.library.item.text.TextItemBuilder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -41,23 +44,24 @@ public class BarCodeItem extends BaseItem implements BarCodeConfiguration, ItemC
     }
 
     @Override
-    public void reset(EscPos escPos) throws IOException{
+    public void reset(Label label) throws IOException{
         super.reset();
 
-        escPos.write(ESC);
-        escPos.write('a');
-        escPos.write(0);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        outputStream.write(ESC);
+        outputStream.write('a');
+        outputStream.write(0);
+
+        label.listBytes.add(outputStream.toByteArray());
 
     }
 
     @Override
-    public void print(EscPos escPos) throws IOException {
+    public void print(Label label) throws IOException {
 
-        byte[] bytes = getBytes();
-
-        escPos.write(bytes, 0, bytes.length);
-
-        reset(escPos);
+        label.listBytes.add(getBytes());
+        reset(label);
 
     }
 

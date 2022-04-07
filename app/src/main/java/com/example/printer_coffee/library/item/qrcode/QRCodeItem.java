@@ -6,6 +6,7 @@ import static com.example.printer_coffee.library.interf.EscPosConst.GS;
 import androidx.annotation.NonNull;
 
 import com.example.printer_coffee.library.EscPos;
+import com.example.printer_coffee.library.Label;
 import com.example.printer_coffee.library.base.BaseItem;
 import com.example.printer_coffee.library.interf.ItemConfiguration;
 import com.example.printer_coffee.library.interf.QRCodeConfiguration;
@@ -53,23 +54,25 @@ public class QRCodeItem extends BaseItem implements QRCodeConfiguration, ItemCon
     }
 
     @Override
-    public void reset(EscPos escPos) throws IOException{
-        super.reset(escPos);
+    public void reset(Label label) throws IOException{
+        super.reset(label);
 
-        escPos.write(ESC);
-        escPos.write('a');
-        escPos.write(0);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
+        outputStream.write(ESC);
+        outputStream.write('a');
+        outputStream.write(0);
+
+        label.listBytes.add(outputStream.toByteArray());
     }
 
     @Override
-    public void print(EscPos escPos) throws IOException {
+    public void print(Label label) throws IOException {
 
         byte[] bytes = getBytes();
+        label.listBytes.add(bytes);
 
-        escPos.write(bytes, 0, bytes.length);
-
-        reset(escPos);
+        reset(label);
     }
 
 

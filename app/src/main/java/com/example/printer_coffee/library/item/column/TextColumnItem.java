@@ -6,6 +6,7 @@ import static com.example.printer_coffee.library.interf.EscPosConst.GS;
 import androidx.annotation.NonNull;
 
 import com.example.printer_coffee.library.EscPos;
+import com.example.printer_coffee.library.Label;
 import com.example.printer_coffee.library.interf.EscPosConst;
 import com.example.printer_coffee.library.base.BaseItem;
 import com.example.printer_coffee.library.interf.ItemConfiguration;
@@ -13,6 +14,7 @@ import com.example.printer_coffee.library.interf.WrapItem;
 import com.example.printer_coffee.library.item.text.TextItem;
 import com.example.printer_coffee.library.item.text.TextItemBuilder;
 
+import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.IOException;
 
@@ -80,25 +82,30 @@ public class TextColumnItem extends BaseItem implements WrapItem, ItemConfigurat
     }
 
     @Override
-    public void print(EscPos escpos) throws IOException {
+    public void print(Label label) throws IOException {
         this.wrap();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
         byte[] buf = this.textPrint.getBytes();
 
-        escpos.write(ESC);
-        escpos.write('E');
+        outputStream.write(ESC);
+        outputStream.write('E');
         int n = isBold ? 1 : 0;
-        escpos.write(n);
+        outputStream.write(n);
 
         n = fontWidth.value << 4 | fontHeight.value;
-        escpos.write(GS);
-        escpos.write('!');
-        escpos.write(n);
+        outputStream.write(GS);
+        outputStream.write('!');
+        outputStream.write(n);
 
-        escpos.write(ESC);
-        escpos.write('M');
-        escpos.write(fontName.value);
+        outputStream.write(ESC);
+        outputStream.write('M');
+        outputStream.write(fontName.value);
 
-        escpos.write(buf);
+        outputStream.write(buf);
+
+        label.listBytes.add(outputStream.toByteArray());
 
         reset();
     }

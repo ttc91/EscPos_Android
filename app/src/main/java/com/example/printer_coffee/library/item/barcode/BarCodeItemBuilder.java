@@ -44,6 +44,17 @@ public class BarCodeItemBuilder implements BarCodeConfiguration, ItemConfigurati
         return this;
     }
 
+    public BarCodeItemBuilder setWidthSize(BarCodeWidthSize width){
+        this.width = width;
+        return this;
+    }
+
+    public BarCodeItemBuilder setHeightSize(BarCodeHeightSize height){
+        this.height = height;
+        return this;
+    }
+
+
     public BarCodeItem build(){
         return new BarCodeItem(this);
     }

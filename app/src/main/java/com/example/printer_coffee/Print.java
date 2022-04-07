@@ -5,10 +5,12 @@ import static com.example.printer_coffee.library.interf.EscPosConst.LF;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
 import com.example.printer_coffee.library.EscPos;
+import com.example.printer_coffee.library.Label;
 import com.example.printer_coffee.library.interf.BarCodeConfiguration;
 import com.example.printer_coffee.library.interf.ItemConfiguration;
 import com.example.printer_coffee.library.item.barcode.BarCodeItem;
@@ -42,160 +44,18 @@ public class Print extends Thread{
         String host = context.getString(R.string.host);
 
         EscPos escPos = EscPos.getInstance();
+
+
         try {
+
             escPos.start(host);
 
-//            BitmapFactory.Options options = new BitmapFactory.Options();
-//            options.inScaled = false;
-
-//            ImageItem imageItem = new ImageItemBuilder().setPath(context,"Pictures","shop.jpg")
-//                    .setRasterBitImageMode(ImageItem.RasterBitImageMode.NORMAL).setJustification(ImageItem.Justification.RIGHT).build();
-//            imageItem.print(escPos);
-
-//            BarCodeItem item = new BarCodeItemBuilder().setData("1234567910").setBarCodeSystem(BarCodeConfiguration.BarCodeSystem.CODE39_B).build();
-//            item.print(escPos);
 
             /*
-            //SHOP NAME :
-            TextItem text = new TextItem("MUSTER RESTAURANT");
-            text.setFontSize(TextItem.FontSize.x3, TextItem.FontSize.x1);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.setBold(true);
-            text.print(escPos);
 
-            //Information :
-            text = new TextItem("www.hqtech.de", 42);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.setBold(true);
-            text.print(escPos);
-
-            text = new TextItem("Herzbergstraoe 128", 42);
-            text.setBold(true);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-            text = new TextItem("10365 Berlin", 42);
-            text.setBold(true);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-            text = new TextItem("Tel: 030 - 1234 5678", 42);
-            text.setBold(true);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-            text = new TextItem("Fax: 030 - 1234 5678", 42);
-            text.setBold(true);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-            text = new TextItem("SteuerNr. 00/000/00000", 42);
-            text.setBold(true);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-            text = new TextItem("-------------------------------", 42);
-            text.setBold(true);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-            Text2Column text2Column = new Text2Column.Builder().leftContent("Rechnung 00002").rightContent("22.03.2022 07:48:58").numCharOfLeft(15).build();
-            text2Column.print(escPos);
-
-            text2Column = new Text2Column.Builder().leftContent("Tischnr . 8").rightContent("Bediener: Chef").numCharOfLeft(15).build();
-            text2Column.print(escPos);
-
-            escPos.writeLF();
-
-            text = new TextItem("Ihre Wartenummer");
-            text.setBold(true);
-            text.setFontSize(TextItem.FontSize.x2, TextItem.FontSize.x2);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-            text = new TextItem("812");
-            text.setBold(true);
-            text.setFontSize(TextItem.FontSize.x3, TextItem.FontSize.x2);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-            escPos.writeLF();
-
-            text2Column = new Text2Column.Builder().leftContent("1x (12) Tom-Kha-Gung Suppe (Koko.)").rightContent("2,50 EUR A").numCharOfLeft(28).build();
-            text2Column.print(escPos);
-            text2Column = new Text2Column.Builder().leftContent("1x (16) Seetang Salat").rightContent("3,50 EUR A").numCharOfLeft(28).build();
-            text2Column.print(escPos);
-
-            text2Column = new Text2Column.Builder().leftContent("1x (16) Seetang Salat").rightContent("3,50 EUR A").numCharOfLeft(28).build();
-            text2Column.print(escPos);
-
-            text = new TextItem("------------", 42);
-            text.setJustification(TextItem.Justification.RIGHT);
-            text.print(escPos);
-
-            text = new TextItem("9.50 EUR", 42);
-            text.setBold(true);
-            text.setFontSize(TextItem.FontSize.x1, TextItem.FontSize.x2);
-            text.setJustification(TextItem.Justification.RIGHT);
-            text.print(escPos);
-
-            text = new TextItem("------------", 42);
-            text.setJustification(TextItem.Justification.RIGHT);
-            text.print(escPos);
-
-            text2Column = new Text2Column.Builder().leftContent("MwSt. A 7% (Tax):").rightContent("0,62 EUR").numCharOfLeft(30).build();
-            text2Column.print(escPos);
-
-            text2Column = new Text2Column.Builder().leftContent("Netto:").rightContent("8,88 EUR").numCharOfLeft(30).build();
-            text2Column.print(escPos);
-
-            text2Column = new Text2Column.Builder().leftContent("Total:").rightContent("9.50 EUR").numCharOfLeft(30).build();
-            text2Column.setBold(true);
-            text2Column.setFontSize(Text2Column.FontSize.x1, Text2Column.FontSize.x2);
-            text2Column.print(escPos);
-
-            text = new TextItem("* * * * *", 42);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-            text = new TextItem("------------------------------", 42);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-            text = new TextItem("Sicherhetitsmodul ausgefallen", 42);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-            text = new TextItem("------------------------------", 42);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-            text = new TextItem("Vielen Dank f r Ihren Besuch!", 42);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-            text = new TextItem("Auf Wiedersehen! Bis demn chst mal wieder!", 42);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-            text = new TextItem("IHR MUSTER RESTAURANT TEAM", 42);
-            text.setJustification(TextItem.Justification.CENTER);
-            text.print(escPos);
-
-
-            QRCodeItem qrCodeItem = new QRCodeItem.Builder()
-                    .setText("1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111"
-                    + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "11111111").setSize(QRCodeItem.QRCodeSize.SMALL).setJustification(QRCodeItem.Justification.CENTER).build();
-            qrCodeItem.print(escPos);
-
-*/
-
-            TextItem textItem = new TextItemBuilder().setText("Tat Tan Chu").setMaxLengthOfLine(30).setJustification(ItemConfiguration.Justification.RIGHT).build();
-            textItem.print(escPos);
-            textItem = new TextItemBuilder().setText("Tat Tan Chu").setJustification(ItemConfiguration.Justification.CENTER).build();
-            textItem.print(escPos);
-
-
+            ImageItem imageItem = new ImageItemBuilder().setPath(context,"Pictures","shop.jpg")
+                    .setRasterBitImageMode(ImageItem.RasterBitImageMode.NORMAL).setJustification(ImageItem.Justification.CENTER).build();
+            imageItem.print(escPos);
 
             TextColumnItem textColumnItem = new TextColumnItemBuilder().leftContent("Rechnung 00002").rightContent("22.03.2022 07:48:58").numCharOfLeft(15).setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT).build();
             textColumnItem.print(escPos);
@@ -203,27 +63,405 @@ public class Print extends Thread{
             textColumnItem = new TextColumnItemBuilder().leftContent("Tischnr . 8").rightContent("Bediener: Chef").setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT).numCharOfLeft(15).build();
             textColumnItem.print(escPos);
 
-//            QRCodeItem qrCodeItem = new QRCodeItemBuilder()
-//                    .setText("1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111"
-//                            + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "11111111").setSize(QRCodeItem.QRCodeSize.SMALL).setJustification(QRCodeItem.Justification.RIGHT).build();
-//            qrCodeItem.print(escPos);
+            //SHOP NAME :
+            TextItem text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 1").setFontSize(TextItem.FontSize.x3, TextItem.FontSize.x1).setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(escPos);
+
+            //Information :
+            text = new TextItemBuilder().setText("www.hqtech.de").setMaxLengthOfLine(42).setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("Herzbergstraoe 128").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("10365 Berlin").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("Tel: 030 - 1234 5678").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("Fax: 030 - 1234 5678").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("SteuerNr. 00/000/00000").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("-------------------------------").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            TextColumnItem text2Column = new TextColumnItemBuilder().leftContent("Rechnung 00002").rightContent("22.03.2022 07:48:58").numCharOfLeft(15).setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT).build();
+            text2Column.print(escPos);
+
+            text2Column = new TextColumnItemBuilder().leftContent("Tischnr . 8").rightContent("Bediener: Chef").numCharOfLeft(15).setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT).build();
+            text2Column.print(escPos);
 
             escPos.writeLF();
 
-            escPos.write(LF);
-            escPos.write(LF);
-            escPos.write(LF);
-            escPos.write(LF);
-            escPos.write(LF);
-            escPos.write(LF);
-            escPos.write(LF);
-            escPos.cut(EscPos.CutMode.FULL);
+
+            imageItem = new ImageItemBuilder().setPath(context,"Pictures","shop.jpg")
+                    .setRasterBitImageMode(ImageItem.RasterBitImageMode.NORMAL).setJustification(ImageItem.Justification.CENTER).build();
+            imageItem.print(escPos1);
+
+            textColumnItem = new TextColumnItemBuilder().leftContent("Rechnung 00002").rightContent("22.03.2022 07:48:58").numCharOfLeft(15).setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT).build();
+            textColumnItem.print(escPos1);
+
+            textColumnItem = new TextColumnItemBuilder().leftContent("Tischnr . 8").rightContent("Bediener: Chef").setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT).numCharOfLeft(15).build();
+            textColumnItem.print(escPos);
+
+            //SHOP NAME :
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setFontSize(TextItem.FontSize.x3, TextItem.FontSize.x1).setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(escPos1);
+
+            //Information :
+            text = new TextItemBuilder().setText("www.hqtech.de").setMaxLengthOfLine(42).setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(escPos1);
+
+            text = new TextItemBuilder().setText("Herzbergstraoe 128").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos1);
+
+            text = new TextItemBuilder().setText("10365 Berlin").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos1);
+
+            text = new TextItemBuilder().setText("Tel: 030 - 1234 5678").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos1);
+
+            text = new TextItemBuilder().setText("Fax: 030 - 1234 5678").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+
+            text = new TextItemBuilder().setText("Ihre Wartenummer").setBold(true).setFontSize(TextItem.FontSize.x2, TextItem.FontSize.x2).setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("812").setBold(true).setFontSize(TextItem.FontSize.x3, TextItem.FontSize.x2).setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            escPos.writeLF();
+
+            text2Column = new TextColumnItemBuilder().leftContent("1x (12) Tom-Kha-Gung Suppe (Koko.)").rightContent("2,50 EUR A").numCharOfLeft(28).setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT).build();
+            text2Column.print(escPos);
+            text2Column = new TextColumnItemBuilder().leftContent("1x (16) Seetang Salat").rightContent("3,50 EUR A").numCharOfLeft(28).setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT).build();
+            text2Column.print(escPos);
+
+            text2Column = new TextColumnItemBuilder().leftContent("1x (16) Seetang Salat").rightContent("3,50 EUR A").numCharOfLeft(28).setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT).build();
+            text2Column.print(escPos);
+
+            text = new TextItemBuilder().setText("------------").setMaxLengthOfLine(42).setJustification(TextItem.Justification.RIGHT).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("9.50 EUR").setMaxLengthOfLine(42).setBold(true).setFontSize(TextItem.FontSize.x1, TextItem.FontSize.x2).setJustification(TextItem.Justification.RIGHT).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("------------").setMaxLengthOfLine(42).setJustification(TextItem.Justification.RIGHT).build();
+            text.print(escPos);
+
+            text2Column = new TextColumnItemBuilder().leftContent("MwSt. A 7% (Tax):").rightContent("0,62 EUR").setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT).numCharOfLeft(30).build();
+            text2Column.print(escPos);
+
+            text2Column = new TextColumnItemBuilder().leftContent("Netto:").rightContent("8,88 EUR").numCharOfLeft(30).setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT).build();
+            text2Column.print(escPos);
+
+            text2Column = new TextColumnItemBuilder().leftContent("Total:").rightContent("9.50 EUR").numCharOfLeft(30).setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT).build();
+            text2Column.setBold(true);
+            text2Column.setFontSize(ItemConfiguration.FontSize.x1, ItemConfiguration.FontSize.x2);
+            text2Column.print(escPos);
+
+            text = new TextItemBuilder().setText("* * * * *").setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("------------------------------").setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("Sicherhetitsmodul ausgefallen").setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("------------------------------").setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("Vielen Dank f r Ihren Besuch!").setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("Auf Wiedersehen! Bis demn chst mal wieder!").setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            text = new TextItemBuilder().setText("IHR MUSTER RESTAURANT TEAM").setJustification(TextItem.Justification.CENTER).build();
+            text.print(escPos);
+
+            escPos.writeLF();
+
+            QRCodeItem qrCodeItem = new QRCodeItemBuilder()
+                    .setText("1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111"
+                            + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "11111111").setSize(QRCodeItem.QRCodeSize.SMALL).setJustification(QRCodeItem.Justification.CENTER).build();
+            qrCodeItem.print(escPos);
+
+            escPos.writeLF();
+            escPos.writeLF();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+        try {
+
+
+//            BarCodeItem item = new BarCodeItemBuilder()
+//                    .setData("1234567")
+//                    .setHRIFont(BarCodeConfiguration.BarCodeHRIFont.FONT_A)
+//                    .setWidthSize(BarCodeConfiguration.BarCodeWidthSize.SIZE_4)
+//                    .setJustification(ItemConfiguration.Justification.CENTER)
+//                    .setBarCodeSystem(BarCodeConfiguration.BarCodeSystem.JAN8_A)
+//                    .build();
+//            item.print(escPos);
+
+
+
+//            TextColumnItem textColumnItem = new TextColumnItemBuilder()
+//                    .leftContent("Rechnung 00002")
+//                    .rightContent("22.03.2022 07:48:58")
+//                    .numCharOfLeft(15)
+//                    .setJustificationOfRightColumn(ItemConfiguration.Justification.RIGHT)
+//                    .build();
+//            textColumnItem.print(escPos1);
+
+//            item = new BarCodeItemBuilder()
+//                    .setData("1234567")
+//                    .setHRIFont(BarCodeConfiguration.BarCodeHRIFont.FONT_A)
+//                    .setWidthSize(BarCodeConfiguration.BarCodeWidthSize.SIZE_4)
+//                    .setJustification(ItemConfiguration.Justification.CENTER)
+//                    .setBarCodeSystem(BarCodeConfiguration.BarCodeSystem.JAN8_A)
+//                    .build();
+//            item.print(escPos);
+
+//            ImageItem imageItem = new ImageItemBuilder().setPath(context,"Pictures","shop.jpg")
+//                    .setRasterBitImageMode(ImageItem.RasterBitImageMode.NORMAL).setJustification(ImageItem.Justification.CENTER).build();
+//            imageItem.print(escPos1);
+
+
+
+//
+//            item = new BarCodeItemBuilder()
+//                    .setData("12345679101")
+//                    .setHRIFont(BarCodeConfiguration.BarCodeHRIFont.FONT_A)
+//                    .setWidthSize(BarCodeConfiguration.BarCodeWidthSize.SIZE_2)
+//                    .setJustification(ItemConfiguration.Justification.CENTER)
+//                    .setBarCodeSystem(BarCodeConfiguration.BarCodeSystem.UPCA)
+//                    .build();
+//            item.print(escPos);
+//
+//            item = new BarCodeItemBuilder()
+//                    .setData("12345679101")
+//                    .setHRIFont(BarCodeConfiguration.BarCodeHRIFont.FONT_A)
+//                    .setWidthSize(BarCodeConfiguration.BarCodeWidthSize.SIZE_2)
+//                    .setJustification(ItemConfiguration.Justification.CENTER)
+//                    .setBarCodeSystem(BarCodeConfiguration.BarCodeSystem.UPCA_B)
+//                    .build();
+//            item.print(escPos);
+//
+//            item = new BarCodeItemBuilder()
+//                    .setData("123456791011")
+//                    .setHRIFont(BarCodeConfiguration.BarCodeHRIFont.FONT_A)
+//                    .setWidthSize(BarCodeConfiguration.BarCodeWidthSize.SIZE_2)
+//                    .setJustification(ItemConfiguration.Justification.CENTER)
+//                    .setBarCodeSystem(BarCodeConfiguration.BarCodeSystem.JAN13_A)
+//                    .build();
+//            item.print(escPos);
+//
+//
+//            item = new BarCodeItemBuilder()
+//                    .setData("123456791011")
+//                    .setHRIFont(BarCodeConfiguration.BarCodeHRIFont.FONT_A)
+//                    .setWidthSize(BarCodeConfiguration.BarCodeWidthSize.SIZE_2)
+//                    .setJustification(ItemConfiguration.Justification.CENTER)
+//                    .setBarCodeSystem(BarCodeConfiguration.BarCodeSystem.JAN13_B)
+//                    .build();
+//            item.print(escPos);
+
+
+             */
+
+            Label label1 = escPos.getNewLabel();
+
+            ImageItem imageItem = new ImageItemBuilder().setPath(context,"Pictures","shop.jpg")
+                    .setRasterBitImageMode(ImageItem.RasterBitImageMode.NORMAL).setJustification(ImageItem.Justification.CENTER).build();
+            imageItem.print(label1);
+
+            //SHOP NAME :
+            TextItem text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 1").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label1);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 1").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label1);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 1").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label1);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 1").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label1);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 1").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label1);
+
+            Label label2 = escPos.getNewLabel();
+
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+
+            imageItem = new ImageItemBuilder().setPath(context,"Pictures","shop.jpg")
+                    .setRasterBitImageMode(ImageItem.RasterBitImageMode.NORMAL).setJustification(ImageItem.Justification.CENTER).build();
+            imageItem.print(label2);
+
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 1").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label1);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 1").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label1);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 1").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label1);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 1").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label1);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 1").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label1);
+
+            Log.e("Check", "OK");
+
+            BarCodeItem item = new BarCodeItemBuilder()
+                    .setData("1234567")
+                    .setHRIFont(BarCodeConfiguration.BarCodeHRIFont.FONT_A)
+                    .setWidthSize(BarCodeConfiguration.BarCodeWidthSize.SIZE_4)
+                    .setJustification(ItemConfiguration.Justification.CENTER)
+                    .setBarCodeSystem(BarCodeConfiguration.BarCodeSystem.JAN8_A)
+                    .build();
+            item.print(label1);
+
+//            Log.e("Check", "OK");
+
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+
+         //   Log.e("Check", "OK");
+
+            item = new BarCodeItemBuilder()
+                    .setData("1234567")
+                    .setHRIFont(BarCodeConfiguration.BarCodeHRIFont.FONT_A)
+                    .setWidthSize(BarCodeConfiguration.BarCodeWidthSize.SIZE_4)
+                    .setJustification(ItemConfiguration.Justification.CENTER)
+                    .setBarCodeSystem(BarCodeConfiguration.BarCodeSystem.JAN8_A)
+                    .build();
+            item.print(label2);
+
+            Log.e("Check", "OK222");
+
+            Label label3 = escPos.getNewLabel();
+
+            QRCodeItem qrCodeItem = new QRCodeItemBuilder()
+                    .setText("1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111"
+                            + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "11111111")
+                    .setSize(QRCodeItem.QRCodeSize.SMALL)
+                    .setJustification(QRCodeItem.Justification.CENTER)
+                    .build();
+
+            qrCodeItem.print(label3);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 3").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label3);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 3").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label3);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 3").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label3);
+
+            Log.e("Check", "OK111");
+
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+            text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
+            text.print(label2);
+
+            Log.e("Check", "OK");
+
+            qrCodeItem = new QRCodeItemBuilder()
+                    .setText("1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111"
+                            + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "11111111").setSize(QRCodeItem.QRCodeSize.SMALL).setJustification(QRCodeItem.Justification.CENTER).build();
+            qrCodeItem.print(label1);
+
+            qrCodeItem = new QRCodeItemBuilder()
+                    .setText("1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111"
+                            + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "11111111").setSize(QRCodeItem.QRCodeSize.SMALL).setJustification(QRCodeItem.Justification.RIGHT).build();
+            qrCodeItem.print(label2);
+
+            Log.e("Check", "OK");
+
+
+            label2.writeInt(LF);
+            label2.writeInt(LF);
+            label2.writeInt(LF);
+            label2.writeInt(LF);
+            label2.writeInt(LF);
+            label2.writeInt(LF);
+            label2.writeInt(LF);
+            label2.cut(EscPos.CutMode.FULL);
+
+            label1.writeInt(LF);
+            label1.writeInt(LF);
+            label1.writeInt(LF);
+            label1.writeInt(LF);
+            label1.writeInt(LF);
+            label1.writeInt(LF);
+            label1.writeInt(LF);
+            label1.cut(EscPos.CutMode.FULL);
+
+            label3.writeInt(LF);
+            label3.writeInt(LF);
+            label3.writeInt(LF);
+            label3.writeInt(LF);
+            label3.writeInt(LF);
+            label3.writeInt(LF);
+            label3.writeInt(LF);
+            label3.cut(EscPos.CutMode.FULL);
+
+
+            escPos.printLabel(label1);
+            escPos.printLabel(label2);
+            escPos.printLabel(label3);
+
 
             escPos.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+
+
 
 
     }
