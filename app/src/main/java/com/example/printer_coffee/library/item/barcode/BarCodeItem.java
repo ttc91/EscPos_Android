@@ -6,26 +6,23 @@ import static com.example.printer_coffee.library.interf.EscPosConst.NUL;
 
 import androidx.annotation.NonNull;
 
-import com.example.printer_coffee.library.EscPos;
-import com.example.printer_coffee.library.Label;
+import com.example.printer_coffee.library.Recept;
 import com.example.printer_coffee.library.base.BaseItem;
 import com.example.printer_coffee.library.interf.BarCodeConfiguration;
 import com.example.printer_coffee.library.interf.ItemConfiguration;
-import com.example.printer_coffee.library.item.text.TextItem;
-import com.example.printer_coffee.library.item.text.TextItemBuilder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class BarCodeItem extends BaseItem implements BarCodeConfiguration, ItemConfiguration,Cloneable {
 
-    private BarCodeHRIPosition position;
-    private BarCodeHRIFont font;
-    private Justification justification ;
-    private BarCodeSystem system;
-    private BarCodeWidthSize width;
-    private BarCodeHeightSize height;
-    private String data;
+    private BarCodeHRIPosition position = BarCodeHRIPosition.NOT_PRINTED_DEFAULT;;
+    private BarCodeHRIFont font = BarCodeHRIFont.FONT_A;;
+    private Justification justification = Justification.LEFT;
+    private BarCodeSystem system = BarCodeSystem.CODE93_Default;
+    private BarCodeWidthSize width = BarCodeWidthSize.SIZE_2;
+    private BarCodeHeightSize height = BarCodeHeightSize.MEDIUM;
+    private String data = "";
 
     protected BarCodeItem (BarCodeItemBuilder builder){
         this.position = builder.position;
@@ -37,6 +34,64 @@ public class BarCodeItem extends BaseItem implements BarCodeConfiguration, ItemC
         this.data = builder.data;
     }
 
+    public BarCodeItem(){}
+
+    public BarCodeHRIPosition getPosition() {
+        return position;
+    }
+
+    public void setPosition(BarCodeHRIPosition position) {
+        this.position = position;
+    }
+
+    public BarCodeHRIFont getFont() {
+        return font;
+    }
+
+    public void setFont(BarCodeHRIFont font) {
+        this.font = font;
+    }
+
+    public Justification getJustification() {
+        return justification;
+    }
+
+    public void setJustification(Justification justification) {
+        this.justification = justification;
+    }
+
+    public BarCodeSystem getSystem() {
+        return system;
+    }
+
+    public void setSystem(BarCodeSystem system) {
+        this.system = system;
+    }
+
+    public BarCodeWidthSize getWidth() {
+        return width;
+    }
+
+    public void setWidth(BarCodeWidthSize width) {
+        this.width = width;
+    }
+
+    public BarCodeHeightSize getHeight() {
+        return height;
+    }
+
+    public void setHeight(BarCodeHeightSize height) {
+        this.height = height;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
     @NonNull
     @Override
     protected Object clone() throws CloneNotSupportedException {
@@ -44,7 +99,7 @@ public class BarCodeItem extends BaseItem implements BarCodeConfiguration, ItemC
     }
 
     @Override
-    public void reset(Label label) throws IOException{
+    public void reset(Recept label) throws IOException{
         super.reset();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -58,7 +113,7 @@ public class BarCodeItem extends BaseItem implements BarCodeConfiguration, ItemC
     }
 
     @Override
-    public void print(Label label) throws IOException {
+    public void print(Recept label) throws IOException {
 
         label.listBytes.add(getBytes());
         reset(label);

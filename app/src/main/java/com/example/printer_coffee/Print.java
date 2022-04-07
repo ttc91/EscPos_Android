@@ -10,13 +10,11 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 
 import com.example.printer_coffee.library.EscPos;
-import com.example.printer_coffee.library.Label;
+import com.example.printer_coffee.library.Recept;
 import com.example.printer_coffee.library.interf.BarCodeConfiguration;
 import com.example.printer_coffee.library.interf.ItemConfiguration;
 import com.example.printer_coffee.library.item.barcode.BarCodeItem;
 import com.example.printer_coffee.library.item.barcode.BarCodeItemBuilder;
-import com.example.printer_coffee.library.item.column.TextColumnItem;
-import com.example.printer_coffee.library.item.column.TextColumnItemBuilder;
 import com.example.printer_coffee.library.item.image.ImageItem;
 import com.example.printer_coffee.library.item.image.ImageItemBuilder;
 import com.example.printer_coffee.library.item.qrcode.QRCodeItem;
@@ -283,7 +281,7 @@ public class Print extends Thread{
 
              */
 
-            Label label1 = escPos.getNewLabel();
+            Recept label1 = escPos.getNewLabel();
 
             ImageItem imageItem = new ImageItemBuilder().setPath(context,"Pictures","shop.jpg")
                     .setRasterBitImageMode(ImageItem.RasterBitImageMode.NORMAL).setJustification(ImageItem.Justification.CENTER).build();
@@ -301,7 +299,7 @@ public class Print extends Thread{
             text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 1").setJustification(TextItem.Justification.CENTER).setBold(true).build();
             text.print(label1);
 
-            Label label2 = escPos.getNewLabel();
+            Recept label2 = escPos.getNewLabel();
 
             text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 2").setJustification(TextItem.Justification.CENTER).setBold(true).build();
             text.print(label2);
@@ -380,7 +378,7 @@ public class Print extends Thread{
 
             Log.e("Check", "OK222");
 
-            Label label3 = escPos.getNewLabel();
+            Recept label3 = escPos.getNewLabel();
 
             QRCodeItem qrCodeItem = new QRCodeItemBuilder()
                     .setText("1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111" + "1111111111"

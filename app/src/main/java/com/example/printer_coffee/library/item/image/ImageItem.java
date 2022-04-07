@@ -5,19 +5,24 @@ import static com.example.printer_coffee.library.interf.EscPosConst.GS;
 
 import static java.lang.Math.round;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.printer_coffee.library.EscPos;
-import com.example.printer_coffee.library.Label;
+import com.example.printer_coffee.library.Recept;
 import com.example.printer_coffee.library.base.BaseItem;
 import com.example.printer_coffee.library.interf.ImageConfiguration;
 import com.example.printer_coffee.library.interf.ItemConfiguration;
-import com.example.printer_coffee.library.item.column.TextColumnItem;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Random;
@@ -25,7 +30,7 @@ import java.util.Set;
 
 public class ImageItem extends BaseItem implements ItemConfiguration, ImageConfiguration, Cloneable {
 
-    private Bitmap bitmap;
+    private Bitmap bitmap = null;
 
     private int matrixWidth = 2;
     private int matrixHeight = 2;
@@ -36,6 +41,38 @@ public class ImageItem extends BaseItem implements ItemConfiguration, ImageConfi
 
     protected Justification justification;
     protected RasterBitImageMode rasterBitImageMode;
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public Justification getJustification() {
+        return justification;
+    }
+
+    public RasterBitImageMode getRasterBitImageMode() {
+        return rasterBitImageMode;
+    }
+
+    public void setPath(Context context, String path, String imageName){
+
+        File extStore = new File (Environment.getExternalStorageDirectory() + File.separator + path + "/" + imageName);
+        Uri image = Uri.fromFile(extStore);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+
+        Log.e("LINK", extStore.getPath());
+        try{
+
+            this.bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), image);
+
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     private ByteArrayOutputStream baCachedEscPosRaster = new ByteArrayOutputStream();
 
@@ -64,6 +101,10 @@ public class ImageItem extends BaseItem implements ItemConfiguration, ImageConfi
             }
         }
     }
+
+    public ImageItem(){}
+
+
 
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
@@ -189,7 +230,7 @@ public class ImageItem extends BaseItem implements ItemConfiguration, ImageConfi
     }
 
     @Override
-    public void print(Label label) throws IOException {
+    public void print(Recept label) throws IOException {
 
         byte[] bytes = getBytes();
         label.listBytes.add(bytes);
@@ -198,7 +239,7 @@ public class ImageItem extends BaseItem implements ItemConfiguration, ImageConfi
     }
 
     @Override
-    public void reset(Label label) throws IOException{
+    public void reset(Recept label) throws IOException{
         super.reset(label);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

@@ -12,12 +12,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Label {
+public class Recept {
 
     public List<byte[]> listBytes = new ArrayList<>();
     private Integer labelId;
 
-    protected Label(Integer labelId){
+    protected Recept(Integer labelId){
         this.labelId = labelId;
     }
 

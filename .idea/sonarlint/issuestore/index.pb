@@ -9,14 +9,6 @@ n
 Tapp/src/main/java/com/example/printer_coffee/library/interf/QRCodeConfiguration.java,a\b\abfe4a0fda60d2882f7ea241d091b6d5efc5c6c3
 ‚
 Rapp/src/main/java/com/example/printer_coffee/library/interf/ItemConfiguration.java,9\6\96d5ea9b14fc2df3f27d2d5d7620e0137426d564
-‹
-[app/src/main/java/com/example/printer_coffee/library/item/column/TextColumnItemBuilder.java,6\7\67f2ebfbe32cbdfcf88c746c0c782eb7c5a263cd
-ƒ
-Sapp/src/main/java/com/example/printer_coffee/library/item/text/TextItemBuilder.java,5\0\500f610a6f2f74cc16afb70e013dabbefc0fe8f7
-…
-Uapp/src/main/java/com/example/printer_coffee/library/item/image/ImageItemBuilder.java,a\3\a32f13680b754d0d80d67a7df898dc01e23b2b6f
-‡
-Wapp/src/main/java/com/example/printer_coffee/library/item/qrcode/QRCodeItemBuilder.java,5\e\5ee7b5bb64177664a4b3dc52d887a32ace82854e
 |
 Lapp/src/main/java/com/example/printer_coffee/library/interf/EscPosConst.java,c\6\c684922cd141bd013bb0e3f1253a4098d3ed26de
 …

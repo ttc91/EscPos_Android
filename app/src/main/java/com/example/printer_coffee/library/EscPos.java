@@ -1,32 +1,21 @@
 package com.example.printer_coffee.library;
 
 
-import static com.example.printer_coffee.library.interf.EscPosConst.GS;
-import static com.example.printer_coffee.library.interf.EscPosConst.LF;
-
-import android.util.Log;
-
-import com.example.printer_coffee.library.base.BaseItem;
 import com.example.printer_coffee.library.interf.EscPosConst;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PipedInputStream;
 import java.net.Socket;
 import java.nio.channels.UnsupportedAddressTypeException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
 
 public class EscPos implements EscPosConst{
 
     private static EscPos escpos = new EscPos();
 
-    private static HashMap<Integer, Label> labelMap = new HashMap<>();
+    private static HashMap<Integer, Recept> labelMap = new HashMap<>();
 
     public static EscPos getInstance(){
         if (escpos == null){
@@ -45,12 +34,12 @@ public class EscPos implements EscPosConst{
 
     private  Socket socket;
 
-    public Label getNewLabel() {
+    public Recept getNewLabel() {
 
         sumOfLabel++;
         labelId++;
         int id = labelId;
-        Label label = new Label(id);
+        Recept label = new Recept(id);
         labelMap.put(1, label);
         return label;
 
@@ -91,7 +80,7 @@ public class EscPos implements EscPosConst{
         return this;
     }
 
-    public void printLabel(Label label) throws IOException{
+    public void printLabel(Recept label) throws IOException{
 
         labelMap.remove(label.getLabelId());
 
@@ -105,7 +94,7 @@ public class EscPos implements EscPosConst{
 
     public void close() throws IOException{
 
-        if(labelMap.size() > 0){
+        if(sumOfLabel > 0){
             labelMap = new HashMap<>();
         }
 

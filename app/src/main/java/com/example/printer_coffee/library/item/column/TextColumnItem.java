@@ -5,8 +5,7 @@ import static com.example.printer_coffee.library.interf.EscPosConst.GS;
 
 import androidx.annotation.NonNull;
 
-import com.example.printer_coffee.library.EscPos;
-import com.example.printer_coffee.library.Label;
+import com.example.printer_coffee.library.Recept;
 import com.example.printer_coffee.library.interf.EscPosConst;
 import com.example.printer_coffee.library.base.BaseItem;
 import com.example.printer_coffee.library.interf.ItemConfiguration;
@@ -15,7 +14,6 @@ import com.example.printer_coffee.library.item.text.TextItem;
 import com.example.printer_coffee.library.item.text.TextItemBuilder;
 
 import java.io.ByteArrayOutputStream;
-import java.io.Closeable;
 import java.io.IOException;
 
 public class TextColumnItem extends BaseItem implements WrapItem, ItemConfiguration, Cloneable {
@@ -24,17 +22,17 @@ public class TextColumnItem extends BaseItem implements WrapItem, ItemConfigurat
 
     private FontName fontName;
 
-    private FontSize fontWidth;
-    private FontSize fontHeight;
+    private FontSize fontWidth = FontSize.x1;
+    private FontSize fontHeight = FontSize.x1;
     private boolean isConfigureFontSize = false;
 
     private EscPosConst.MaxCharOfLength  maxLengthOfLineDefault = EscPosConst.MaxCharOfLength._42;
 
-    private Justification leftColJustification;
-    private Justification rightColJustification;
+    private Justification leftColJustification = Justification.LEFT;
+    private Justification rightColJustification = Justification.LEFT;
 
-    protected String leftText;
-    protected String rightText;
+    protected String leftText = "";
+    protected String rightText = "";
     protected Integer numCharOfLeftContent;
     private String textPrint = "";
 
@@ -81,8 +79,72 @@ public class TextColumnItem extends BaseItem implements WrapItem, ItemConfigurat
         this.rightColJustification = justification;
     }
 
+    public boolean isBold() {
+        return isBold;
+    }
+
+    public FontName getFontName() {
+        return fontName;
+    }
+
+    public FontSize getFontWidth() {
+        return fontWidth;
+    }
+
+    public void setFontWidth(FontSize fontWidth) {
+        this.fontWidth = fontWidth;
+    }
+
+    public FontSize getFontHeight() {
+        return fontHeight;
+    }
+
+    public void setFontHeight(FontSize fontHeight) {
+        this.fontHeight = fontHeight;
+    }
+
+    public Justification getLeftColJustification() {
+        return leftColJustification;
+    }
+
+    public void setLeftColJustification(Justification leftColJustification) {
+        this.leftColJustification = leftColJustification;
+    }
+
+    public Justification getRightColJustification() {
+        return rightColJustification;
+    }
+
+    public void setRightColJustification(Justification rightColJustification) {
+        this.rightColJustification = rightColJustification;
+    }
+
+    public String getLeftText() {
+        return leftText;
+    }
+
+    public String getRightText() {
+        return rightText;
+    }
+
+    public Integer getNumCharOfLeftContent() {
+        return numCharOfLeftContent;
+    }
+
+    public void setNumCharOfLeftContent(Integer numCharOfLeftContent) {
+        this.numCharOfLeftContent = numCharOfLeftContent;
+    }
+
+    public String getTextPrint() {
+        return textPrint;
+    }
+
+    public void setTextPrint(String textPrint) {
+        this.textPrint = textPrint;
+    }
+
     @Override
-    public void print(Label label) throws IOException {
+    public void print(Recept label) throws IOException {
         this.wrap();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

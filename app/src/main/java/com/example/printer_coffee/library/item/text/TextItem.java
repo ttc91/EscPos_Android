@@ -5,8 +5,7 @@ import static com.example.printer_coffee.library.interf.EscPosConst.GS;
 
 import androidx.annotation.NonNull;
 
-import com.example.printer_coffee.library.EscPos;
-import com.example.printer_coffee.library.Label;
+import com.example.printer_coffee.library.Recept;
 import com.example.printer_coffee.library.interf.EscPosConst;
 import com.example.printer_coffee.library.base.BaseItem;
 import com.example.printer_coffee.library.interf.ItemConfiguration;
@@ -15,23 +14,22 @@ import com.example.printer_coffee.library.item.column.TextColumnItem;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
 
 public class TextItem extends BaseItem implements WrapItem, ItemConfiguration, Cloneable {
 
     private boolean isBold = false;
 
-    private FontName fontName;
+    private FontName fontName = FontName.Font_A_Default;
     private boolean isConfigureFontName = false;
 
-    private FontSize fontWidth;
-    private FontSize fontHeight;
+    private FontSize fontWidth = FontSize.x1;
+    private FontSize fontHeight = FontSize.x1;
     private boolean isConfigureFontSize = false;
 
-    private Justification justification;
+    private Justification justification = Justification.LEFT;
 
-    private String text;
-    private Integer maxLengthOfLine;
+    private String text = "";
+    private Integer maxLengthOfLine = null;
 
     private EscPosConst.MaxCharOfLength maxLengthOfLineDefault = EscPosConst.MaxCharOfLength._42;
 
@@ -54,6 +52,56 @@ public class TextItem extends BaseItem implements WrapItem, ItemConfiguration, C
         this.isConfigureFontSize = build.isConfigureFontSize;
     }
 
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public boolean isConfigureFontName() {
+        return isConfigureFontName;
+    }
+
+    public void setConfigureFontName(boolean configureFontName) {
+        isConfigureFontName = configureFontName;
+    }
+
+    public Integer getMaxLengthOfLine() {
+        return maxLengthOfLine;
+    }
+
+    public void setMaxLengthOfLine(Integer maxLengthOfLine) {
+        this.maxLengthOfLine = maxLengthOfLine;
+    }
+
+    public boolean isBold() {
+        return isBold;
+    }
+
+    public FontName getFontName() {
+        return fontName;
+    }
+
+    public FontSize getFontWidth() {
+        return fontWidth;
+    }
+
+    public void setFontWidth(FontSize fontWidth) {
+        this.fontWidth = fontWidth;
+    }
+
+    public FontSize getFontHeight() {
+        return fontHeight;
+    }
+
+    public void setFontHeight(FontSize fontHeight) {
+        this.fontHeight = fontHeight;
+    }
+
+    public Justification getJustification() {
+        return justification;
+    }
+
+
+
     public void setJustification(Justification justification){
         this.justification = justification;
     }
@@ -74,7 +122,7 @@ public class TextItem extends BaseItem implements WrapItem, ItemConfiguration, C
     }
 
     @Override
-    public void print(Label label) throws IOException{
+    public void print(Recept label) throws IOException{
 
         wrap();
 

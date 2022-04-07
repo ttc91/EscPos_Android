@@ -5,25 +5,23 @@ import static com.example.printer_coffee.library.interf.EscPosConst.GS;
 
 import androidx.annotation.NonNull;
 
-import com.example.printer_coffee.library.EscPos;
-import com.example.printer_coffee.library.Label;
+import com.example.printer_coffee.library.Recept;
 import com.example.printer_coffee.library.base.BaseItem;
 import com.example.printer_coffee.library.interf.ItemConfiguration;
 import com.example.printer_coffee.library.interf.QRCodeConfiguration;
-import com.example.printer_coffee.library.item.column.TextColumnItem;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class QRCodeItem extends BaseItem implements QRCodeConfiguration, ItemConfiguration, Cloneable {
 
-    private String text;
-    private QRCodeSize size;
-    private QRCodeErrorCorrectionLevel errorCorrectionLevel;
-    private QRCodeModel qrCodeModel;
-    private Justification justification;
+    private String text = "";
+    private QRCodeSize size = QRCodeSize.SMALL;
+    private QRCodeErrorCorrectionLevel errorCorrectionLevel = QRCodeErrorCorrectionLevel.ECL_M;
+    private QRCodeModel qrCodeModel = QRCodeModel.Model_1;
+    private Justification justification = Justification.LEFT;
 
-    public QRCodeItem(QRCodeItemBuilder build){
+    protected QRCodeItem(QRCodeItemBuilder build){
 
         this.text = build.text;
         this.errorCorrectionLevel = build.errorCorrectionLevel;
@@ -32,6 +30,8 @@ public class QRCodeItem extends BaseItem implements QRCodeConfiguration, ItemCon
         this.justification = build.justification;
 
     }
+
+    public QRCodeItem(){}
 
     public void setText(String text) {
         this.text = text;
@@ -53,8 +53,28 @@ public class QRCodeItem extends BaseItem implements QRCodeConfiguration, ItemCon
         this.justification = justification;
     }
 
+    public QRCodeErrorCorrectionLevel getErrorCorrectionLevel() {
+        return errorCorrectionLevel;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public QRCodeSize getSize() {
+        return size;
+    }
+
+    public QRCodeModel getQrCodeModel() {
+        return qrCodeModel;
+    }
+
+    public Justification getJustification() {
+        return justification;
+    }
+
     @Override
-    public void reset(Label label) throws IOException{
+    public void reset(Recept label) throws IOException{
         super.reset(label);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -67,7 +87,7 @@ public class QRCodeItem extends BaseItem implements QRCodeConfiguration, ItemCon
     }
 
     @Override
-    public void print(Label label) throws IOException {
+    public void print(Recept label) throws IOException {
 
         byte[] bytes = getBytes();
         label.listBytes.add(bytes);
