@@ -1,6 +1,6 @@
 package com.example.printer_coffee.library.item.column;
 
-import com.example.printer_coffee.library.interf.ItemConfiguration;
+import com.example.printer_coffee.library.interf.configuration.ItemConfiguration;
 
 public class TextColumnItemBuilder implements ItemConfiguration {
     protected String leftText = "";

@@ -6,10 +6,10 @@ import static com.example.printer_coffee.library.interf.EscPosConst.NUL;
 
 import androidx.annotation.NonNull;
 
-import com.example.printer_coffee.library.Recept;
+import com.example.printer_coffee.library.Task;
 import com.example.printer_coffee.library.base.BaseItem;
-import com.example.printer_coffee.library.interf.BarCodeConfiguration;
-import com.example.printer_coffee.library.interf.ItemConfiguration;
+import com.example.printer_coffee.library.interf.configuration.BarCodeConfiguration;
+import com.example.printer_coffee.library.interf.configuration.ItemConfiguration;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -99,7 +99,7 @@ public class BarCodeItem extends BaseItem implements BarCodeConfiguration, ItemC
     }
 
     @Override
-    public void reset(Recept label) throws IOException{
+    public void reset(Task label) throws IOException{
         super.reset();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -113,10 +113,10 @@ public class BarCodeItem extends BaseItem implements BarCodeConfiguration, ItemC
     }
 
     @Override
-    public void print(Recept label) throws IOException {
+    public void print(Task task) throws IOException {
 
-        label.listBytes.add(getBytes());
-        reset(label);
+        task.listBytes.add(getBytes());
+        reset(task);
 
     }
 

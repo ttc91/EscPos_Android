@@ -1,7 +1,7 @@
 package com.example.printer_coffee.library.item.qrcode;
 
-import com.example.printer_coffee.library.interf.ItemConfiguration;
-import com.example.printer_coffee.library.interf.QRCodeConfiguration;
+import com.example.printer_coffee.library.interf.configuration.ItemConfiguration;
+import com.example.printer_coffee.library.interf.configuration.QRCodeConfiguration;
 
 public class QRCodeItemBuilder implements ItemConfiguration, QRCodeConfiguration {
 

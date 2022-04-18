@@ -1,17 +1,13 @@
 
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-ƒ
-Sapp/src/main/java/com/example/printer_coffee/library/interf/ImageConfiguration.java,1\5\1555586c276d7219b50b2b5a584715d21c35ef38
 n
 >app/src/main/java/com/example/printer_coffee/MainActivity.java,9\e\9e6aac2a5cb143b04bd4a9baf9f9e3faa3c696be
-„
-Tapp/src/main/java/com/example/printer_coffee/library/interf/QRCodeConfiguration.java,a\b\abfe4a0fda60d2882f7ea241d091b6d5efc5c6c3
-‚
-Rapp/src/main/java/com/example/printer_coffee/library/interf/ItemConfiguration.java,9\6\96d5ea9b14fc2df3f27d2d5d7620e0137426d564
-|
-Lapp/src/main/java/com/example/printer_coffee/library/interf/EscPosConst.java,c\6\c684922cd141bd013bb0e3f1253a4098d3ed26de
-…
-Uapp/src/main/java/com/example/printer_coffee/library/interf/BarCodeConfiguration.java,3\6\36244b3f9f6a36e696415a31f19508d993223905
+w
+Gapp/src/main/java/com/example/printer_coffee/library/item/ItemEnum.java,d\3\d3762d001a25c03023dc20a459b3e84d00078f39
 y
 Iapp/src/main/java/com/example/printer_coffee/library/interf/WrapItem.java,6\c\6c72b1ae0d9b23894e0a733f078f06b8608ce458
+z
+Japp/src/main/java/com/example/printer_coffee/library/item/ItemFactory.java,1\4\148468e0c9af8553f696d794c6540ae66f530967
+|
+Lapp/src/main/java/com/example/printer_coffee/library/interf/EscPosConst.java,c\6\c684922cd141bd013bb0e3f1253a4098d3ed26de

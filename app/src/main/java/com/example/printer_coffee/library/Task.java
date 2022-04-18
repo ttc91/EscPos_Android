@@ -12,17 +12,17 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recept {
+public class Task {
 
     public List<byte[]> listBytes = new ArrayList<>();
-    private Integer labelId;
+    private Integer receiptId;
 
-    protected Recept(Integer labelId){
-        this.labelId = labelId;
+    protected Task(Integer receiptId){
+        this.receiptId = receiptId;
     }
 
     protected Integer getLabelId(){
-        return this.labelId;
+        return this.receiptId;
     }
 
     protected List<byte[]> getListBytes(){

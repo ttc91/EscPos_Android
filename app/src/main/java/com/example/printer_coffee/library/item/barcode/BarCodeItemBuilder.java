@@ -1,7 +1,7 @@
 package com.example.printer_coffee.library.item.barcode;
 
-import com.example.printer_coffee.library.interf.BarCodeConfiguration;
-import com.example.printer_coffee.library.interf.ItemConfiguration;
+import com.example.printer_coffee.library.interf.configuration.BarCodeConfiguration;
+import com.example.printer_coffee.library.interf.configuration.ItemConfiguration;
 
 public class BarCodeItemBuilder implements BarCodeConfiguration, ItemConfiguration{
 

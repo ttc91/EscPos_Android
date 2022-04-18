@@ -1,4 +1,4 @@
-package com.example.printer_coffee.library.interf;
+package com.example.printer_coffee.library.interf.configuration;
 
 public interface QRCodeConfiguration {
 

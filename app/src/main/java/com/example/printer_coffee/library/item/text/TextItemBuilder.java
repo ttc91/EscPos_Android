@@ -1,6 +1,6 @@
 package com.example.printer_coffee.library.item.text;
 
-import com.example.printer_coffee.library.interf.ItemConfiguration;
+import com.example.printer_coffee.library.interf.configuration.ItemConfiguration;
 
 public class TextItemBuilder implements ItemConfiguration {
 

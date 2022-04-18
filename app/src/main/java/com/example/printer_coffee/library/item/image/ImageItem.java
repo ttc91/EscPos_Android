@@ -15,10 +15,10 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.printer_coffee.library.Recept;
+import com.example.printer_coffee.library.Task;
 import com.example.printer_coffee.library.base.BaseItem;
-import com.example.printer_coffee.library.interf.ImageConfiguration;
-import com.example.printer_coffee.library.interf.ItemConfiguration;
+import com.example.printer_coffee.library.interf.configuration.ImageConfiguration;
+import com.example.printer_coffee.library.interf.configuration.ItemConfiguration;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -230,17 +230,17 @@ public class ImageItem extends BaseItem implements ItemConfiguration, ImageConfi
     }
 
     @Override
-    public void print(Recept label) throws IOException {
+    public void print(Task task) throws IOException {
 
         byte[] bytes = getBytes();
-        label.listBytes.add(bytes);
+        task.listBytes.add(bytes);
 
-        reset(label);
+        reset(task);
     }
 
     @Override
-    public void reset(Recept label) throws IOException{
-        super.reset(label);
+    public void reset(Task task) throws IOException{
+        super.reset(task);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -248,7 +248,7 @@ public class ImageItem extends BaseItem implements ItemConfiguration, ImageConfi
         outputStream.write('a');
         outputStream.write(0);
 
-        label.listBytes.add(outputStream.toByteArray());
+        task.listBytes.add(outputStream.toByteArray());
     }
 
     @NonNull

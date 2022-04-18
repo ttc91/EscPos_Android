@@ -1,8 +1,6 @@
 package com.example.printer_coffee.library.item.image;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -10,10 +8,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import androidx.core.app.ActivityCompat;
-
-import com.example.printer_coffee.library.interf.ImageConfiguration;
-import com.example.printer_coffee.library.interf.ItemConfiguration;
+import com.example.printer_coffee.library.interf.configuration.ImageConfiguration;
+import com.example.printer_coffee.library.interf.configuration.ItemConfiguration;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -5,10 +5,10 @@ import static com.example.printer_coffee.library.interf.EscPosConst.GS;
 
 import androidx.annotation.NonNull;
 
-import com.example.printer_coffee.library.Recept;
+import com.example.printer_coffee.library.Task;
 import com.example.printer_coffee.library.interf.EscPosConst;
 import com.example.printer_coffee.library.base.BaseItem;
-import com.example.printer_coffee.library.interf.ItemConfiguration;
+import com.example.printer_coffee.library.interf.configuration.ItemConfiguration;
 import com.example.printer_coffee.library.interf.WrapItem;
 import com.example.printer_coffee.library.item.column.TextColumnItem;
 
@@ -122,7 +122,7 @@ public class TextItem extends BaseItem implements WrapItem, ItemConfiguration, C
     }
 
     @Override
-    public void print(Recept label) throws IOException{
+    public void print(Task task) throws IOException{
 
         wrap();
 
@@ -146,7 +146,7 @@ public class TextItem extends BaseItem implements WrapItem, ItemConfiguration, C
 
         outputStream.write(bytes);
 
-        label.listBytes.add(outputStream.toByteArray());
+        task.listBytes.add(outputStream.toByteArray());
     }
 
     @Override
