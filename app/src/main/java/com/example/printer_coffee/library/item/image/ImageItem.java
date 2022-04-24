@@ -15,7 +15,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.printer_coffee.library.Task;
+import com.example.printer_coffee.library.task.Task;
 import com.example.printer_coffee.library.base.BaseItem;
 import com.example.printer_coffee.library.interf.configuration.ImageConfiguration;
 import com.example.printer_coffee.library.interf.configuration.ItemConfiguration;

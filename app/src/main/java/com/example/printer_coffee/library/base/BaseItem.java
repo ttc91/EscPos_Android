@@ -1,6 +1,6 @@
 package com.example.printer_coffee.library.base;
 
-import com.example.printer_coffee.library.Task;
+import com.example.printer_coffee.library.task.Task;
 
 import java.io.IOException;
 

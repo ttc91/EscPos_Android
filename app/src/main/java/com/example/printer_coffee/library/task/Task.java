@@ -1,4 +1,4 @@
-package com.example.printer_coffee.library;
+package com.example.printer_coffee.library.task;
 
 import static com.example.printer_coffee.library.interf.EscPosConst.GS;
 import static com.example.printer_coffee.library.interf.EscPosConst.LF;
@@ -16,6 +16,7 @@ public class Task {
 
     public List<byte[]> listBytes = new ArrayList<>();
     private Integer receiptId;
+    public ListBytesIterator iterator;
 
     protected Task(Integer receiptId){
         this.receiptId = receiptId;
@@ -29,10 +30,20 @@ public class Task {
         return this.listBytes;
     }
 
+    public ListBytesIterator initIterator () {
+
+        return iterator = new ListBytesIterator();
+
+    }
+
     public void writeStr(String content) throws UnsupportedAddressTypeException, IOException {
 
         this.listBytes.add(content.getBytes(StandardCharsets.UTF_8));
 
+    }
+
+    public void addBytes(byte[] bytes){
+        this.listBytes.add(bytes);
     }
 
     public void writeLF() throws UnsupportedAddressTypeException, IOException{

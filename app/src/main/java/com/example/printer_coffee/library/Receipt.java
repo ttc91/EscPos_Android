@@ -2,16 +2,19 @@ package com.example.printer_coffee.library;
 
 import android.util.Log;
 
+import com.example.printer_coffee.library.base.BaseReceipt;
 import com.example.printer_coffee.library.interf.observer.EscPosSubject;
 import com.example.printer_coffee.library.interf.observer.ReceiptObserver;
+import com.example.printer_coffee.library.task.Task;
 
-public class Receipt implements ReceiptObserver {
+public class Receipt extends BaseReceipt implements ReceiptObserver {
 
-    private final EscPosSubject subject;
+    private EscPos escPos;
+
+    private EscPosSubject subject;
     private Task task;
 
-    public Receipt(EscPosSubject subject){
-        this.subject = subject;
+    public Receipt(){
     }
 
     public void setTask(Task task) {
@@ -48,5 +51,11 @@ public class Receipt implements ReceiptObserver {
     public Task getReceipt() {
         return getTask();
     }
+
+    @Override
+    public void setSubjectMediator(EscPosSubject subject) {
+        this.subject = subject;
+    }
+
 
 }

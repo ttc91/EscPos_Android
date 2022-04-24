@@ -8,15 +8,12 @@ import androidx.annotation.RequiresApi;
 
 import com.example.printer_coffee.library.EscPos;
 import com.example.printer_coffee.library.Receipt;
-import com.example.printer_coffee.library.Task;
+import com.example.printer_coffee.library.task.Task;
 import com.example.printer_coffee.library.interf.observer.EscPosSubject;
-import com.example.printer_coffee.library.interf.observer.ReceiptObserver;
 import com.example.printer_coffee.library.item.text.TextItem;
 import com.example.printer_coffee.library.item.text.TextItemBuilder;
 
 import java.io.IOException;
-
-import javax.security.auth.Subject;
 
 public class Print extends Thread{
 
@@ -77,7 +74,8 @@ public class Print extends Thread{
             e.printStackTrace();
         }
 
-        Receipt receipt1 = new Receipt(subject);
+        Receipt receipt1 = new Receipt();
+        receipt1.setSubjectMediator(subject);
         receipt1.setTask(label1);
 
         receipt1.subscribe();

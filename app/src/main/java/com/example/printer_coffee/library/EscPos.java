@@ -6,9 +6,9 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.printer_coffee.library.interf.EscPosConst;
 import com.example.printer_coffee.library.interf.observer.EscPosSubject;
 import com.example.printer_coffee.library.interf.observer.ReceiptObserver;
+import com.example.printer_coffee.library.task.Task;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -19,7 +19,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Observable;
 import java.util.Set;
 
 public class EscPos implements EscPosSubject {

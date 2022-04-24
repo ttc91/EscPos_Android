@@ -5,7 +5,7 @@ import static com.example.printer_coffee.library.interf.EscPosConst.GS;
 
 import androidx.annotation.NonNull;
 
-import com.example.printer_coffee.library.Task;
+import com.example.printer_coffee.library.task.Task;
 import com.example.printer_coffee.library.base.BaseItem;
 import com.example.printer_coffee.library.interf.configuration.ItemConfiguration;
 import com.example.printer_coffee.library.interf.configuration.QRCodeConfiguration;
