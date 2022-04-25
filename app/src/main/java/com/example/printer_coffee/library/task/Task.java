@@ -18,15 +18,15 @@ public class Task {
     private Integer receiptId;
     public ListBytesIterator iterator;
 
-    protected Task(Integer receiptId){
+    public Task(Integer receiptId){
         this.receiptId = receiptId;
     }
 
-    protected Integer getLabelId(){
+    public Integer getLabelId(){
         return this.receiptId;
     }
 
-    protected List<byte[]> getListBytes(){
+    public List<byte[]> getListBytes(){
         return this.listBytes;
     }
 

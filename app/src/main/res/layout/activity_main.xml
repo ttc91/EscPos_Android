@@ -1,26 +1,770 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="none"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/tv_item"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/button_print"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Text Item"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
 
-    <Button
+    <EditText
+        android:id="@+id/tv"
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10sp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@color/white"
+        android:layout_height="150dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center"
+            android:text="Justification :"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/ti_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="10dp"
+                android:onClick="textItemJustificationCheck"
+                android:text="Left"/>
+
+            <RadioButton
+                android:id="@+id/ti_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="10dp"
+                android:onClick="textItemJustificationCheck"
+                android:text="Center"/>
+
+            <RadioButton
+                android:id="@+id/ti_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="10dp"
+                android:onClick="textItemJustificationCheck"
+                android:text="Right"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center"
+            android:text="Set bold :"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/is_bold_true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="10dp"
+                android:onClick="setTextItemFontBoldCheck"
+                android:text="Yes"/>
+
+            <RadioButton
+                android:id="@+id/is_bold_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="10dp"
+                android:onClick="setTextItemFontBoldCheck"
+                android:text="No"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center"
+            android:text="Font width :"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/font_w_x1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="10dp"
+                android:onClick="setTextItemFontWidthCheck"
+                android:text="x1"/>
+
+            <RadioButton
+                android:id="@+id/font_w_x2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="10dp"
+                android:onClick="setTextItemFontWidthCheck"
+                android:text="x2"/>
+
+            <RadioButton
+                android:id="@+id/font_w_x3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="10dp"
+                android:onClick="setTextItemFontWidthCheck"
+                android:text="x3"/>
+
+            <RadioButton
+                android:id="@+id/font_w_x4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="10dp"
+                android:onClick="setTextItemFontWidthCheck"
+                android:text="x4"/>
+
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center"
+            android:text="Font height :"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/font_h_x1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="10dp"
+                android:onClick="setTextItemFontHeightCheck"
+                android:text="x1"/>
+
+            <RadioButton
+                android:id="@+id/font_h_x2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:textSize="10dp"
+                android:onClick="setTextItemFontHeightCheck"
+                android:text="x2"/>
+
+            <RadioButton
+                android:id="@+id/font_h_x3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:textSize="10dp"
+                android:onClick="setTextItemFontHeightCheck"
+                android:text="x3"/>
+
+            <RadioButton
+                android:id="@+id/font_h_x4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:textSize="10dp"
+                android:onClick="setTextItemFontHeightCheck"
+                android:text="x4"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Column Item"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/tv_left"
+                android:inputType="textMultiLine"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="10sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/white"
+                android:layout_height="150dp"/>
+
+            <EditText
+                android:id="@+id/tv_right"
+                android:inputType="textMultiLine"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="10sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/white"
+                android:layout_height="150dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:text="Justify left text :"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/ci_lcontent_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:textSize="10dp"
+                    android:onClick="columnItemJustifyLeftCheck"
+                    android:text="Left"/>
+
+                <RadioButton
+                    android:id="@+id/ci_lcontent_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:textSize="10dp"
+                    android:onClick="columnItemJustifyLeftCheck"
+                    android:text="Center"/>
+
+                <RadioButton
+                    android:id="@+id/ci_lcontent_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:textSize="10dp"
+                    android:onClick="columnItemJustifyLeftCheck"
+                    android:text="Right"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:text="Justify right text :"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/ci_rcontent_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:onClick="columnItemJustifyRightCheck"
+                    android:text="Left"
+                    android:textSize="10dp" />
+
+                <RadioButton
+                    android:id="@+id/ci_rcontent_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:textSize="10dp"
+                    android:onClick="columnItemJustifyRightCheck"
+                    android:text="Center"/>
+
+                <RadioButton
+                    android:id="@+id/ci_rcontent_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:textSize="10dp"
+                    android:onClick="columnItemJustifyRightCheck"
+                    android:text="Right"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:text="Set bold :"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/ci_is_bold_true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="columnTextItemFontBoldCheck"
+                    android:text="Yes"/>
+
+                <RadioButton
+                    android:id="@+id/ci_is_bold_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="columnTextItemFontBoldCheck"
+                    android:text="No"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:text="Font width :"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/ic_font_w_x1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="setColumnItemFontWidthCheck"
+                    android:text="x1"/>
+
+                <RadioButton
+                    android:id="@+id/ic_font_w_x2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="setColumnItemFontWidthCheck"
+                    android:text="x2"/>
+
+                <RadioButton
+                    android:id="@+id/ic_font_w_x3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="setColumnItemFontWidthCheck"
+                    android:text="x3"/>
+
+                <RadioButton
+                    android:id="@+id/ic_font_w_x4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="setColumnItemFontWidthCheck"
+                    android:text="x4"/>
+
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:text="Font height :"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/ic_font_h_x1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="setColumnItemFontHeightCheck"
+                    android:text="x1"/>
+
+                <RadioButton
+                    android:id="@+id/ic_font_h_x2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:textSize="10dp"
+                    android:onClick="setColumnItemFontHeightCheck"
+                    android:text="x2"/>
+
+                <RadioButton
+                    android:id="@+id/ic_font_h_x3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:textSize="10dp"
+                    android:onClick="setColumnItemFontHeightCheck"
+                    android:text="x3"/>
+
+                <RadioButton
+                    android:id="@+id/ic_font_h_x4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:textSize="10dp"
+                    android:onClick="setColumnItemFontHeightCheck"
+                    android:text="x4"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="QR Code Item"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/tv_qrcode"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@color/white"
+            android:layout_height="150dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:text="Size :"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/qr_size_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="setQRCodeSize"
+                    android:text="small"/>
+
+                <RadioButton
+                    android:id="@+id/qr_size_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="setQRCodeSize"
+                    android:text="medium"/>
+
+                <RadioButton
+                    android:id="@+id/qr_size_large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="setQRCodeSize"
+                    android:text="large"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:text="Error level :"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/qr_l"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="setQRCodeErrorCorrectionLevel"
+                    android:text="L"/>
+
+                <RadioButton
+                    android:id="@+id/qr_m"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="setQRCodeErrorCorrectionLevel"
+                    android:text="M"/>
+
+                <RadioButton
+                    android:id="@+id/qr_q"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="setQRCodeErrorCorrectionLevel"
+                    android:text="Q"/>
+
+                <RadioButton
+                    android:id="@+id/qr_h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="setQRCodeErrorCorrectionLevel"
+                    android:text="H"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:text="Justification :"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/qr_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="qrCodeJustificationCheck"
+                    android:text="Left"/>
+
+                <RadioButton
+                    android:id="@+id/qr_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="qrCodeJustificationCheck"
+                    android:text="Center"/>
+
+                <RadioButton
+                    android:id="@+id/qr_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="qrCodeJustificationCheck"
+                    android:text="Right"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:text="Model :"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/qr_m1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="setQRCodeModel"
+                    android:text="mode 1"/>
+
+                <RadioButton
+                    android:id="@+id/qr_m2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="10dp"
+                    android:onClick="setQRCodeModel"
+                    android:text="mode 2"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+        <Button
         android:id="@+id/button_print"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Print"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_item" />
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="Print"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</ScrollView>

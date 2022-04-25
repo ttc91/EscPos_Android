@@ -8,20 +8,25 @@ import androidx.annotation.RequiresApi;
 
 import com.example.printer_coffee.library.EscPos;
 import com.example.printer_coffee.library.Receipt;
+import com.example.printer_coffee.library.base.BaseItem;
+import com.example.printer_coffee.library.interf.EscPosConst;
 import com.example.printer_coffee.library.task.Task;
 import com.example.printer_coffee.library.interf.observer.EscPosSubject;
 import com.example.printer_coffee.library.item.text.TextItem;
 import com.example.printer_coffee.library.item.text.TextItemBuilder;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Print extends Thread{
 
     private Context context;
     private Bitmap bitmap;
+    private List<BaseItem> items;
 
-    public Print(Context context){
+    public Print(Context context, List<BaseItem> items){
         this.context = context;
+        this.items = items;
     }
 
 
@@ -44,31 +49,12 @@ public class Print extends Thread{
 
         try {
 
-            TextItem text = new TextItemBuilder().setText("MUSTER RESTAURANT ESCPOS 1").setFontSize(TextItem.FontSize.x3, TextItem.FontSize.x1).setJustification(TextItem.Justification.CENTER).setBold(true).build();
-            text.print(label1);
-
-            text = new TextItemBuilder().setText("www.hqtech.de").setMaxLengthOfLine(42).setJustification(TextItem.Justification.CENTER).setBold(true).build();
-            text.print(label1);
-
-            text = new TextItemBuilder().setText("Herzbergstraoe 128").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
-            text.print(label1);
-
-            text = new TextItemBuilder().setText("10365 Berlin").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
-            text.print(label1);
-
-            text = new TextItemBuilder().setText("Tel: 030 - 1234 5678").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
-            text.print(label1);
-
-            text = new TextItemBuilder().setText("Fax: 030 - 1234 5678").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
-            text.print(label1);
-
-            text = new TextItemBuilder().setText("SteuerNr. 00/000/00000").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
-            text.print(label1);
-
-            text = new TextItemBuilder().setText("-------------------------------").setMaxLengthOfLine(42).setBold(true).setJustification(TextItem.Justification.CENTER).build();
-            text.print(label1);
+            for(BaseItem item : items){
+                item.print(label1);
+            }
 
             label1.writeLF();
+            label1.cut(EscPosConst.CutMode.FULL);
 
         } catch (IOException e) {
             e.printStackTrace();
